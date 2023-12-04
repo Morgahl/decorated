@@ -12,10 +12,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Tool Versions
+        uses: marocchino/tool-versions-action@v1
+        id: versions
+
       - name: Sets up an Erlang/OTP environment
         uses: erlef/setup-beam@v1
         with:
-          version-file: .tool-versions
+          otp-version: ${{ steps.versions.outputs.erlang }}
+          elixir-version: ${{ steps.versions.outputs.elixir }}
 
       - name: Build docs
         uses: lee-dohm/generate-elixir-docs@v1.0.1
