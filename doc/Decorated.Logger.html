@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.30.9">
+    <meta name="project" content="Decorated v0.1.0">
+
+    <title>Decorated.Logger — Decorated v0.1.0</title>
+    <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
+
+
+    <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
+    <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
+    <script src="dist/sidebar_items-6FEC8DC3.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/html-J2ASZTQE.js"></script>
+
+
+  </head>
+  <body data-type="modules" class="page-module">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <label class="search-label">
+      <span class="sr-only">Search documentation of Decorated</span>
+      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    </label>
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+      <i class="ri-close-line ri-lg" title="Cancel search"></i>
+    </button>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+
+    <div class="sidebar-projectDetails">
+      <a href="Decorated.html" class="sidebar-projectName" translate="no">
+Decorated
+      </a>
+      <div class="sidebar-projectVersion" translate="no">
+        v0.1.0
+      </div>
+    </div>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
+
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
+
+
+    </ul>
+  </div>
+
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
+
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+</nav>
+
+<main class="content">
+  <output role="status" id="toast"></output>
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+<button class="icon-action display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+    <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L1" title="View Source" class="icon-action" rel="help">
+      <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+      <span class="sr-only">View Source</span>
+    </a>
+
+  <span translate="no">Decorated.Logger</span> 
+  <small class="app-vsn" translate="no">(Decorated v0.1.0)</small>
+
+</h1>
+
+
+  <section id="moduledoc">
+<p>A simple decorator that takes a message and logs the function name, arguments, and result of a function call.</p><h2 id="module-example" class="section-heading">
+  <a href="#module-example" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Example</span>
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyMath</span><span class="w"> </span><span class="k" data-group-id="0395871768-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Decorated.Logger</span><span class="w">
+
+  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">info_log</span><span class="p" data-group-id="0395871768-2">(</span><span class="ss">catch</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p" data-group-id="0395871768-2">)</span><span class="w">
+  </span><span class="na">@spec</span><span class="w"> </span><span class="n">add</span><span class="p" data-group-id="0395871768-3">(</span><span class="n">number</span><span class="p" data-group-id="0395871768-4">(</span><span class="p" data-group-id="0395871768-4">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0395871768-5">(</span><span class="p" data-group-id="0395871768-5">)</span><span class="p" data-group-id="0395871768-3">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0395871768-6">(</span><span class="p" data-group-id="0395871768-6">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">add</span><span class="p" data-group-id="0395871768-7">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="0395871768-7">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0395871768-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="0395871768-8">}</span><span class="w">
+
+  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">debug_log</span><span class="p" data-group-id="0395871768-9">(</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="k" data-group-id="0395871768-10">fn</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;sub() -&gt; %{result}&quot;</span><span class="w"> </span><span class="k" data-group-id="0395871768-10">end</span><span class="p" data-group-id="0395871768-9">)</span><span class="w">
+  </span><span class="na">@spec</span><span class="w"> </span><span class="n">sub</span><span class="p" data-group-id="0395871768-11">(</span><span class="n">number</span><span class="p" data-group-id="0395871768-12">(</span><span class="p" data-group-id="0395871768-12">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0395871768-13">(</span><span class="p" data-group-id="0395871768-13">)</span><span class="p" data-group-id="0395871768-11">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0395871768-14">(</span><span class="p" data-group-id="0395871768-14">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">sub</span><span class="p" data-group-id="0395871768-15">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="0395871768-15">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0395871768-16">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="0395871768-16">}</span><span class="w">
+
+  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">warning_log</span><span class="p" data-group-id="0395871768-17">(</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="k" data-group-id="0395871768-18">fn</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;multiply() -&gt; %{result}&quot;</span><span class="w"> </span><span class="k" data-group-id="0395871768-18">end</span><span class="p" data-group-id="0395871768-17">)</span><span class="w">
+  </span><span class="na">@spec</span><span class="w"> </span><span class="n">multiply</span><span class="p" data-group-id="0395871768-19">(</span><span class="n">number</span><span class="p" data-group-id="0395871768-20">(</span><span class="p" data-group-id="0395871768-20">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0395871768-21">(</span><span class="p" data-group-id="0395871768-21">)</span><span class="p" data-group-id="0395871768-19">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0395871768-22">(</span><span class="p" data-group-id="0395871768-22">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p" data-group-id="0395871768-23">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="0395871768-23">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0395871768-24">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="0395871768-24">}</span><span class="w">
+
+  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">silent_log</span><span class="p" data-group-id="0395871768-25">(</span><span class="ss">catch</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p" data-group-id="0395871768-25">)</span><span class="w">
+  </span><span class="na">@spec</span><span class="w"> </span><span class="n">divide!</span><span class="p" data-group-id="0395871768-26">(</span><span class="n">number</span><span class="p" data-group-id="0395871768-27">(</span><span class="p" data-group-id="0395871768-27">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0395871768-28">(</span><span class="p" data-group-id="0395871768-28">)</span><span class="p" data-group-id="0395871768-26">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0395871768-29">(</span><span class="p" data-group-id="0395871768-29">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">divide!</span><span class="p" data-group-id="0395871768-30">(</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="0395871768-30">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="k">raise</span><span class="p" data-group-id="0395871768-31">(</span><span class="s">&quot;do not divide by zero in MyMath functions&quot;</span><span class="p" data-group-id="0395871768-31">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">divide!</span><span class="p" data-group-id="0395871768-32">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="0395871768-32">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">b</span><span class="w">
+</span><span class="k" data-group-id="0395871768-1">end</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">add</span><span class="p" data-group-id="0395871768-33">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0395871768-33">)</span><span class="w">
+</span><span class="c1">#&gt; 23:14:44.410 [info] MyMath.add!(1, 2) -&gt;</span><span class="w">
+</span><span class="p" data-group-id="0395871768-34">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="0395871768-34">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">sub</span><span class="p" data-group-id="0395871768-35">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0395871768-35">)</span><span class="w">
+</span><span class="c1">#&gt; 23:14:44.410 [debug] sub() -&gt; -1</span><span class="w">
+</span><span class="p" data-group-id="0395871768-36">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p" data-group-id="0395871768-36">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">multiply</span><span class="p" data-group-id="0395871768-37">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0395871768-37">)</span><span class="w">
+</span><span class="c1">#&gt; 23:14:44.410 [warning] multiply() -&gt; 2</span><span class="w">
+</span><span class="p" data-group-id="0395871768-38">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0395871768-38">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">divide!</span><span class="p" data-group-id="0395871768-39">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0395871768-39">)</span><span class="w">
+</span><span class="mf">2.0</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">divide!</span><span class="p" data-group-id="0395871768-40">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="0395871768-40">)</span><span class="w">
+</span><span class="gt">** (RuntimeError) do not divide by zero in MyMath functions</span><span class="w">
+
+</span><span class="c1">#&gt; 23:14:44.410 [error] MyMath.divide!(4, 0) -&gt; ** (RuntimeError) do not divide by zero in MyMath functions</span></code></pre>
+  </section>
+
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Summary</span>
+    </h1>
+<div class="summary-types summary">
+  <h2>
+    <a href="#types">Types</a>
+  </h2>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#t:options/0" translate="no">options()</a>
+
+      </div>
+
+    </div>
+
+</div>
+<div class="summary-functions summary">
+  <h2>
+    <a href="#functions">Functions</a>
+  </h2>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#alert_log/0" translate="no">alert_log()</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#alert_log/1" translate="no">alert_log(var1)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#alert_log/3" translate="no">alert_log(opts \\ [], body, ctx)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>A decorator that produces a ALERT level log using the provided message.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#critical_log/0" translate="no">critical_log()</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#critical_log/1" translate="no">critical_log(var1)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#critical_log/3" translate="no">critical_log(opts \\ [], body, ctx)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>A decorator that produces a CRITICAL level log using the provided message.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#debug_log/0" translate="no">debug_log()</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#debug_log/1" translate="no">debug_log(var1)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#debug_log/3" translate="no">debug_log(opts \\ [], body, ctx)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>A decorator that produces a DEBUG level log using the provided message.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#emergency_log/0" translate="no">emergency_log()</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#emergency_log/1" translate="no">emergency_log(var1)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#emergency_log/3" translate="no">emergency_log(opts \\ [], body, ctx)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>A decorator that produces a EMERGENCY level log using the provided message.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#error_log/0" translate="no">error_log()</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#error_log/1" translate="no">error_log(var1)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#error_log/3" translate="no">error_log(opts \\ [], body, ctx)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>A decorator that produces a ERROR level log using the provided message.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#info_log/0" translate="no">info_log()</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#info_log/1" translate="no">info_log(var1)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#info_log/3" translate="no">info_log(opts \\ [], body, ctx)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>A decorator that produces an INFO level log using the provided message.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#notice_log/0" translate="no">notice_log()</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#notice_log/1" translate="no">notice_log(var1)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#notice_log/3" translate="no">notice_log(opts \\ [], body, ctx)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>A decorator that produces a NOTICE level log using the provided message.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#silent/2" translate="no">silent(msg \\ nil, ctx \\ nil)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#silent_log/0" translate="no">silent_log()</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#silent_log/1" translate="no">silent_log(var1)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#silent_log/3" translate="no">silent_log(opts \\ [], body, ctx)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>A decorator that produces no log UNLESS a configuration is provided in which case it produces a log at the provided
+level using the provided message.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#stringify_args/1" translate="no">stringify_args(args)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#warning_log/0" translate="no">warning_log()</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#warning_log/1" translate="no">warning_log(var1)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#warning_log/3" translate="no">warning_log(opts \\ [], body, ctx)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>A decorator that produces a WARNING level log using the provided message.</p></div>
+
+    </div>
+
+</div>
+
+  </section>
+
+
+  <section id="types" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#types">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Types</span>
+    </h1>
+    <div class="types-list">
+<section class="detail" id="t:options/0">
+
+  <div class="detail-header">
+    <a href="#t:options/0" class="detail-link" title="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature" translate="no">options()</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L73" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> options() :: [<a href="Decorated.Logger.Opts.html#t:log_opt/0">Decorated.Logger.Opts.log_opt</a>()]</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Functions</span>
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="alert_log/0">
+
+  <div class="detail-header">
+    <a href="#alert_log/0" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">alert_log()</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> alert_log() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="alert_log/1">
+
+  <div class="detail-header">
+    <a href="#alert_log/1" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">alert_log(var1)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> alert_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="alert_log/3">
+
+    <span id="alert_log/2"></span>
+
+  <div class="detail-header">
+    <a href="#alert_log/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">alert_log(opts \\ [], body, ctx)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L143" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>A decorator that produces a ALERT level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
+definition.</p>
+  </section>
+</section>
+<section class="detail" id="critical_log/0">
+
+  <div class="detail-header">
+    <a href="#critical_log/0" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">critical_log()</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> critical_log() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="critical_log/1">
+
+  <div class="detail-header">
+    <a href="#critical_log/1" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">critical_log(var1)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> critical_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="critical_log/3">
+
+    <span id="critical_log/2"></span>
+
+  <div class="detail-header">
+    <a href="#critical_log/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">critical_log(opts \\ [], body, ctx)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L133" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>A decorator that produces a CRITICAL level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
+definition.</p>
+  </section>
+</section>
+<section class="detail" id="debug_log/0">
+
+  <div class="detail-header">
+    <a href="#debug_log/0" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">debug_log()</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> debug_log() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="debug_log/1">
+
+  <div class="detail-header">
+    <a href="#debug_log/1" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">debug_log(var1)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> debug_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="debug_log/3">
+
+    <span id="debug_log/2"></span>
+
+  <div class="detail-header">
+    <a href="#debug_log/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">debug_log(opts \\ [], body, ctx)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L83" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>A decorator that produces a DEBUG level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
+definition.</p>
+  </section>
+</section>
+<section class="detail" id="emergency_log/0">
+
+  <div class="detail-header">
+    <a href="#emergency_log/0" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">emergency_log()</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> emergency_log() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="emergency_log/1">
+
+  <div class="detail-header">
+    <a href="#emergency_log/1" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">emergency_log(var1)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> emergency_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="emergency_log/3">
+
+    <span id="emergency_log/2"></span>
+
+  <div class="detail-header">
+    <a href="#emergency_log/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">emergency_log(opts \\ [], body, ctx)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L153" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>A decorator that produces a EMERGENCY level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
+definition.</p>
+  </section>
+</section>
+<section class="detail" id="error_log/0">
+
+  <div class="detail-header">
+    <a href="#error_log/0" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">error_log()</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> error_log() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="error_log/1">
+
+  <div class="detail-header">
+    <a href="#error_log/1" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">error_log(var1)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> error_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="error_log/3">
+
+    <span id="error_log/2"></span>
+
+  <div class="detail-header">
+    <a href="#error_log/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">error_log(opts \\ [], body, ctx)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L123" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>A decorator that produces a ERROR level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
+definition.</p>
+  </section>
+</section>
+<section class="detail" id="info_log/0">
+
+  <div class="detail-header">
+    <a href="#info_log/0" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">info_log()</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> info_log() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="info_log/1">
+
+  <div class="detail-header">
+    <a href="#info_log/1" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">info_log(var1)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> info_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="info_log/3">
+
+    <span id="info_log/2"></span>
+
+  <div class="detail-header">
+    <a href="#info_log/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">info_log(opts \\ [], body, ctx)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L93" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>A decorator that produces an INFO level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
+definition.</p>
+  </section>
+</section>
+<section class="detail" id="notice_log/0">
+
+  <div class="detail-header">
+    <a href="#notice_log/0" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">notice_log()</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> notice_log() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="notice_log/1">
+
+  <div class="detail-header">
+    <a href="#notice_log/1" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">notice_log(var1)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> notice_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="notice_log/3">
+
+    <span id="notice_log/2"></span>
+
+  <div class="detail-header">
+    <a href="#notice_log/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">notice_log(opts \\ [], body, ctx)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L103" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>A decorator that produces a NOTICE level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
+definition.</p>
+  </section>
+</section>
+<section class="detail" id="silent/2">
+
+    <span id="silent/0"></span>
+
+    <span id="silent/1"></span>
+
+  <div class="detail-header">
+    <a href="#silent/2" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">silent(msg \\ nil, ctx \\ nil)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L166" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="silent_log/0">
+
+  <div class="detail-header">
+    <a href="#silent_log/0" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">silent_log()</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> silent_log() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="silent_log/1">
+
+  <div class="detail-header">
+    <a href="#silent_log/1" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">silent_log(var1)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> silent_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="silent_log/3">
+
+    <span id="silent_log/2"></span>
+
+  <div class="detail-header">
+    <a href="#silent_log/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">silent_log(opts \\ [], body, ctx)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L164" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>A decorator that produces no log UNLESS a configuration is provided in which case it produces a log at the provided
+level using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
+definition.</p>
+  </section>
+</section>
+<section class="detail" id="stringify_args/1">
+
+  <div class="detail-header">
+    <a href="#stringify_args/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">stringify_args(args)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L168" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="warning_log/0">
+
+  <div class="detail-header">
+    <a href="#warning_log/0" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">warning_log()</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> warning_log() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="warning_log/1">
+
+  <div class="detail-header">
+    <a href="#warning_log/1" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">warning_log(var1)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> warning_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="warning_log/3">
+
+    <span id="warning_log/2"></span>
+
+  <div class="detail-header">
+    <a href="#warning_log/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">warning_log(opts \\ [], body, ctx)</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L113" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>A decorator that produces a WARNING level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
+definition.</p>
+  </section>
+</section>
+
+    </div>
+  </section>
+
+      <footer class="footer">
+        <p>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+              Search HexDocs
+            </button>
+
+              <a href="Decorated.epub" title="ePub version">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.9) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+      </footer>
+    </div>
+  </div>
+</main>
+</div>
+
+
+  </body>
+</html>

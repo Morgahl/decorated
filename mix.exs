@@ -9,7 +9,15 @@ defmodule Decorated.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      dialyzer: dialyzer()
+      dialyzer: dialyzer(),
+
+      # Docs
+      name: "Decorated",
+      source_url: "https://github.com/Morgahl/decorated",
+      docs: [
+        main: "Decorated",
+        extras: ["README.md", "LICENSE"]
+      ]
     ]
   end
 
