@@ -28,3 +28,5 @@ decorated-*.tar
 # Ignore Elixir LS temp files
 
 .elixir_ls/
+
+.secrets/
