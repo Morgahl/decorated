@@ -1,6 +1,49 @@
 defmodule Decorated.Logger do
   @moduledoc """
   A simple decorator that takes a message and logs the function name, arguments, and result of a function call.
+
+  ## Example
+
+      defmodule MyMath do
+        use Decorated.Logger
+
+        @decorate info_log(catch: :error)
+        @spec add(number(), number()) :: number()
+        def add(a, b), do: {:ok, a + b}
+
+        @decorate debug_log(message: fn result -> "sub() -> %{result}" end)
+        @spec sub(number(), number()) :: number()
+        def sub(a, b), do: {:ok, a - b}
+
+        @decorate warning_log(message: fn result -> "multiply() -> %{result}" end)
+        @spec multiply(number(), number()) :: number()
+        def multiply(a, b), do: {:ok, a * b}
+
+        @decorate silent_log(catch: :error)
+        @spec divide!(number(), number()) :: number()
+        def divide!(_, 0), do: raise("do not divide by zero in MyMath functions")
+        def divide!(a, b), do: a / b
+      end
+
+      iex> MyMath.add(1, 2)
+      #> 23:14:44.410 [info] MyMath.add!(1, 2) ->
+      {:ok, 3}
+
+      iex> MyMath.sub(1, 2)
+      #> 23:14:44.410 [debug] sub() -> -1
+      {:ok, -1}
+
+      iex> MyMath.multiply(1, 2)
+      #> 23:14:44.410 [warning] multiply() -> 2
+      {:ok, 2}
+
+      iex> MyMath.divide!(4, 2)
+      2.0
+
+      iex> MyMath.divide!(4, 0)
+      ** (RuntimeError) do not divide by zero in MyMath functions
+
+      #> 23:14:44.410 [error] MyMath.divide!(4, 0) -> ** (RuntimeError) do not divide by zero in MyMath functions
   """
 
   use Decorator.Define,
@@ -23,52 +66,11 @@ defmodule Decorated.Logger do
     silent_log: 0,
     silent_log: 1
 
-  @levels [
-    :silent,
-    :debug,
-    :info,
-    :notice,
-    :warning,
-    :error,
-    :critical,
-    :alert,
-    :emergency
-  ]
+  import Decorated.Utilites.Compile
 
-  @ignore_behaviours [
-    :drop,
-    :rename,
-    :keep
-  ]
+  alias Decorated.Logger.Opts
 
-  @typedoc """
-  The log level to use for a given configuration.
-  """
-  @type log_level() ::
-          :silent
-          | :debug
-          | :info
-          | :notice
-          | :warning
-          | :error
-          | :critical
-          | :alert
-          | :emergency
-
-  @type ignore_behaviour() ::
-          :drop
-          | :rename
-          | :keep
-
-  @typedoc """
-  The log level configuration for a given common divergent scenarios.
-  """
-  @type log_opt() ::
-          {:message, String.t()}
-          | {:none, log_level()}
-          | {:error, log_level()}
-          | {:catch, log_level()}
-          | {:ignored, ignore_behaviour()}
+  @type options() :: [Opts.log_opt()]
 
   @doc """
   A decorator that produces a DEBUG level log using the provided message.
@@ -77,7 +79,7 @@ defmodule Decorated.Logger do
   definition.
   """
   @spec debug_log() :: no_return()
-  @spec debug_log([log_opt()]) :: no_return()
+  @spec debug_log(options()) :: no_return()
   def debug_log(opts \\ [], body, ctx), do: log(:debug, opts, body, ctx)
 
   @doc """
@@ -87,7 +89,7 @@ defmodule Decorated.Logger do
   definition.
   """
   @spec info_log() :: no_return()
-  @spec info_log([log_opt()]) :: no_return()
+  @spec info_log(options()) :: no_return()
   def info_log(opts \\ [], body, ctx), do: log(:info, opts, body, ctx)
 
   @doc """
@@ -97,7 +99,7 @@ defmodule Decorated.Logger do
   definition.
   """
   @spec notice_log() :: no_return()
-  @spec notice_log([log_opt()]) :: no_return()
+  @spec notice_log(options()) :: no_return()
   def notice_log(opts \\ [], body, ctx), do: log(:notice, opts, body, ctx)
 
   @doc """
@@ -107,7 +109,7 @@ defmodule Decorated.Logger do
   definition.
   """
   @spec warning_log() :: no_return()
-  @spec warning_log([log_opt()]) :: no_return()
+  @spec warning_log(options()) :: no_return()
   def warning_log(opts \\ [], body, ctx), do: log(:warning, opts, body, ctx)
 
   @doc """
@@ -117,7 +119,7 @@ defmodule Decorated.Logger do
   definition.
   """
   @spec error_log() :: no_return()
-  @spec error_log([log_opt()]) :: no_return()
+  @spec error_log(options()) :: no_return()
   def error_log(opts \\ [], body, ctx), do: log(:error, opts, body, ctx)
 
   @doc """
@@ -127,7 +129,7 @@ defmodule Decorated.Logger do
   definition.
   """
   @spec critical_log() :: no_return()
-  @spec critical_log([log_opt()]) :: no_return()
+  @spec critical_log(options()) :: no_return()
   def critical_log(opts \\ [], body, ctx), do: log(:critical, opts, body, ctx)
 
   @doc """
@@ -137,7 +139,7 @@ defmodule Decorated.Logger do
   definition.
   """
   @spec alert_log() :: no_return()
-  @spec alert_log([log_opt()]) :: no_return()
+  @spec alert_log(options()) :: no_return()
   def alert_log(opts \\ [], body, ctx), do: log(:alert, opts, body, ctx)
 
   @doc """
@@ -147,7 +149,7 @@ defmodule Decorated.Logger do
   definition.
   """
   @spec emergency_log() :: no_return()
-  @spec emergency_log([log_opt()]) :: no_return()
+  @spec emergency_log(options()) :: no_return()
   def emergency_log(opts \\ [], body, ctx), do: log(:emergency, opts, body, ctx)
 
   @doc """
@@ -158,59 +160,31 @@ defmodule Decorated.Logger do
   definition.
   """
   @spec silent_log() :: no_return()
-  @spec silent_log([log_opt()]) :: no_return()
+  @spec silent_log(options()) :: no_return()
   def silent_log(opts \\ [], body, ctx), do: log(:silent, opts, body, ctx)
 
   defmacro silent(_msg \\ nil, _ctx \\ nil), do: nil
 
   def stringify_args(args) do
-    args
-    |> Enum.map_join(", ", fn
-      {:atom, atom} when is_atom(atom) ->
-        inspect(atom)
-
-      atom when is_atom(atom) ->
-        case Atom.to_string(atom) do
-          "_" -> :_
-          <<"_", _::binary>> = string -> "#" <> string
-          binary -> binary
-        end
-
-      binary when is_binary(binary) ->
-        binary
-
-      arg ->
-        inspect(arg)
+    Enum.map_join(args, ", ", fn
+      {:ignored, ignored} -> ignored
+      arg -> inspect(arg, limit: :infinity, trim: :infinity)
     end)
   end
 
-  defguardp valid_message?(message) when is_nil(message) or is_binary(message) or (is_tuple(message) and elem(message, 0) == :<<>>)
+  defp build_logger_imports(log_level, %Opts{none_level: none_level, error_level: error_level, catch_level: catch_level}) do
+    logger_imports =
+      for level <- [log_level, none_level, error_level, catch_level],
+          level != :silent,
+          uniq: true,
+          do: {level, 2}
 
-  defmacrop raise_compile_error(desc, ctx) do
-    quote(do: raise(CompileError, description: unquote(desc), file: unquote(ctx).file, line: unquote(ctx).line))
+    silent_import = if log_level == :silent, do: [silent: 2], else: []
+
+    {logger_imports, silent_import}
   end
 
-  defp build_log_opts!(log_level, opts, ctx) when log_level in @levels do
-    with msg when valid_message?(msg) <- Keyword.get(opts, :message),
-         none_level when none_level in @levels <- Keyword.get(opts, :none, log_level),
-         error_level when error_level in @levels <- Keyword.get(opts, :error, log_level),
-         catch_level when catch_level in @levels <- Keyword.get(opts, :catch, log_level),
-         ignored_behaviour when ignored_behaviour in @ignore_behaviours <- Keyword.get(opts, :ignored, :rename) do
-      {msg, none_level, error_level, catch_level, ignored_behaviour}
-    else
-      {opt, value} -> raise_compile_error("invalid log option #{inspect(opt)} with value #{inspect(value)}", ctx)
-    end
-  end
-
-  defp build_logger_imports(log_level, none_level, error_level, catch_level)
-       when log_level in @levels and none_level in @levels and error_level in @levels and catch_level in @levels do
-    for level <- [log_level, none_level, error_level, catch_level],
-        level != :silent,
-        uniq: true,
-        do: {level, 2}
-  end
-
-  defp ctx_drop_or_rename_args(ctx, ignored_behaviour) when ignored_behaviour in @ignore_behaviours do
+  defp ctx_drop_or_rename_args(ctx, ignored_behaviour) do
     ctx
     |> Map.update!(:args, &drop_or_rename_args(&1, ignored_behaviour))
     |> Map.from_struct()
@@ -218,63 +192,187 @@ defmodule Decorated.Logger do
 
   defp drop_or_rename_args(args, :keep), do: args
 
-  defp drop_or_rename_args(args, ignored_behaviour) when ignored_behaviour in @ignore_behaviours do
-    args
-    |> Enum.flat_map(&drop_or_rename_arg(&1, ignored_behaviour))
+  defp drop_or_rename_args(args, ignored_behaviour) do
+    Enum.flat_map(args, &drop_or_rename_arg(&1, ignored_behaviour))
   end
 
-  defp drop_or_rename_arg(arg, ignored_behaviour) when ignored_behaviour in @ignore_behaviours do
-    with {name, _, _} <- arg, <<"_", _::binary>> <- Atom.to_string(name) do
-      case ignored_behaviour do
-        :drop -> []
-        :rename -> [name]
-      end
-    else
-      atom when is_atom(atom) -> [{:atom, atom}]
+  defp drop_or_rename_arg({name, _, _} = arg, :drop) do
+    case Atom.to_string(name) do
+      <<"_", _::binary>> -> []
       _ -> [arg]
     end
   end
 
-  defp log(log_level, opts, body, ctx) when log_level in @levels do
-    {msg, none_level, error_level, catch_level, ignored_behaviour} = build_log_opts!(log_level, opts, ctx)
-    logger_imports = build_logger_imports(log_level, none_level, error_level, catch_level)
-    ctx = ctx_drop_or_rename_args(ctx, ignored_behaviour)
-    %{module: module, name: name, args: args} = ctx
+  defp drop_or_rename_arg({name, _, _} = arg, :rename) do
+    case Atom.to_string(name) do
+      <<"_", _::binary>> = ignored -> [{:ignored, ignored}]
+      _ -> [arg]
+    end
+  end
 
-    quote generated: true, location: :keep do
+  defp drop_or_rename_arg(arg, _ignored_behaviour), do: [arg]
+
+  defguardp is_valid_message?(message) when is_binary(message) or (is_tuple(message) and elem(message, 0) == :<<>>)
+
+  # credo:disable-for-next-line Credo.Check.Refactor.CyclomaticComplexity
+  defp log(log_level, opts, body, ctx) do
+    opts = Opts.build!(log_level, opts, ctx)
+    {logger_imports, silent_import} = build_logger_imports(log_level, opts)
+    ctx = ctx_drop_or_rename_args(ctx, opts.ignored)
+
+    case opts.message do
+      nil ->
+        log_msg_nil(log_level, opts, {logger_imports, silent_import}, body, ctx)
+
+      message when is_valid_message?(message) ->
+        log_msg_string(log_level, opts, {logger_imports, silent_import}, body, ctx, message)
+
+      message_fn ->
+        case get_ast_function_arity!(message_fn) do
+          1 ->
+            log_msg_func_1(log_level, opts, {logger_imports, silent_import}, body, ctx, message_fn)
+
+          2 ->
+            log_msg_func_2(log_level, opts, {logger_imports, silent_import}, body, ctx, message_fn)
+
+          _ ->
+            raise_error("The message function must be arity of 1 or 2", file: ctx.file, line: get_ast_line_location!(message_fn))
+        end
+    end
+  end
+
+  defp log_msg_nil(log_level, opts, {logger_imports, silent_import}, body, ctx) do
+    mf_prefix = "#{inspect(ctx.module)}.#{Atom.to_string(ctx.name)}"
+
+    quote generated: true do
       import Logger, only: [unquote_splicing(logger_imports)]
-      import Decorated.Logger, only: [silent: 2, stringify_args: 1]
-
-      ctx = [unquote_splicing(Map.to_list(ctx))]
+      import Decorated.Logger, only: [unquote_splicing(silent_import)]
+      metadata = unquote(opts.metadata)
 
       try do
         result = unquote(body)
-
-        message =
-          unquote(msg) ||
-            "#{unquote(inspect(module))}.#{unquote(Atom.to_string(name))}(#{stringify_args(unquote(args))}) -> #{inspect(result)}"
-
-        ctx = [{:result, result} | ctx]
+        message = "#{unquote(mf_prefix)}(#{Decorated.Logger.stringify_args(unquote(ctx.args))}) -> #{inspect(result)}"
+        metadata = [{:result, result} | metadata]
 
         case result do
-          :none -> unquote(none_level)(message, ctx)
-          :error -> unquote(error_level)(message, ctx)
-          {:error, _} -> unquote(error_level)(message, ctx)
-          _ -> unquote(log_level)(message, ctx)
+          :none -> unquote(opts.none_level)(message, metadata)
+          :error -> unquote(opts.error_level)(message, metadata)
+          {:error, _} -> unquote(opts.error_level)(message, metadata)
+          _ -> unquote(log_level)(message, metadata)
         end
 
         result
       catch
         kind, caught ->
-          message =
-            unquote(msg) ||
-              "#{unquote(inspect(module))}.#{unquote(Atom.to_string(name))}(#{stringify_args(unquote(args))}) -> #catch{kind: #{inspect(kind)}, caught: #{inspect(caught)}}"
+          message = "#{unquote(mf_prefix)}(#{Decorated.Logger.stringify_args(unquote(ctx.args))}) -> #{Exception.format(kind, caught)}"
+          metadata = [{:kind, kind} | [{:caught, caught} | metadata]]
+          unquote(opts.catch_level)(message, metadata)
 
-          ctx = [{:caught, caught} | [{:kind, kind} | ctx]]
+          case kind do
+            :error -> reraise caught, __STACKTRACE__
+            _ -> reraise kind, caught, __STACKTRACE__
+          end
+      end
+    end
+  end
 
-          unquote(catch_level)(message, ctx)
+  defp log_msg_string(log_level, opts, {logger_imports, silent_import}, body, _ctx, message) do
+    quote generated: true do
+      import Logger, only: [unquote_splicing(logger_imports)]
+      import Decorated.Logger, only: [unquote_splicing(silent_import)]
+      metadata = unquote(opts.metadata)
 
-          reraise caught, __STACKTRACE__
+      try do
+        result = unquote(body)
+        message = unquote(message)
+        metadata = [{:result, result} | metadata]
+
+        case result do
+          :none -> unquote(opts.none_level)(message, metadata)
+          :error -> unquote(opts.error_level)(message, metadata)
+          {:error, _} -> unquote(opts.error_level)(message, metadata)
+          _ -> unquote(log_level)(message, metadata)
+        end
+
+        result
+      catch
+        kind, caught ->
+          message = unquote(message)
+          metadata = [{:kind, kind} | [{:caught, caught} | metadata]]
+          unquote(opts.catch_level)(message, metadata)
+
+          case kind do
+            :error -> reraise caught, __STACKTRACE__
+            _ -> reraise kind, caught, __STACKTRACE__
+          end
+      end
+    end
+  end
+
+  defp log_msg_func_1(log_level, opts, {logger_imports, silent_import}, body, _ctx, message) do
+    quote generated: true do
+      import Logger, only: [unquote_splicing(logger_imports)]
+      import Decorated.Logger, only: [unquote_splicing(silent_import)]
+      metadata = unquote(opts.metadata)
+
+      try do
+        result = unquote(body)
+        message = unquote(message).(result)
+        metadata = [{:result, result} | metadata]
+
+        case result do
+          :none -> unquote(opts.none_level)(message, metadata)
+          :error -> unquote(opts.error_level)(message, metadata)
+          {:error, _} -> unquote(opts.error_level)(message, metadata)
+          _ -> unquote(log_level)(message, metadata)
+        end
+
+        result
+      catch
+        kind, caught ->
+          message = unquote(message).({kind, caught})
+          metadata = [{:kind, kind} | [{:caught, caught} | metadata]]
+          unquote(opts.catch_level)(message, metadata)
+
+          case kind do
+            :error -> reraise caught, __STACKTRACE__
+            _ -> reraise kind, caught, __STACKTRACE__
+          end
+      end
+    end
+  end
+
+  defp log_msg_func_2(log_level, opts, {logger_imports, silent_import}, body, ctx, message) do
+    quote generated: true do
+      import Logger, only: [unquote_splicing(logger_imports)]
+      import Decorated.Logger, only: [unquote_splicing(silent_import)]
+      metadata = unquote(opts.metadata)
+
+      ctx = unquote(ctx)
+
+      try do
+        result = unquote(body)
+        message = unquote(message).(result, ctx)
+        metadata = [{:result, result} | metadata]
+
+        case result do
+          :none -> unquote(opts.none_level)(message, metadata)
+          :error -> unquote(opts.error_level)(message, metadata)
+          {:error, _} -> unquote(opts.error_level)(message, metadata)
+          _ -> unquote(log_level)(message, metadata)
+        end
+
+        result
+      catch
+        kind, caught ->
+          message = unquote(message).({kind, caught}, ctx)
+          metadata = [{:kind, kind} | [{:caught, caught} | metadata]]
+          unquote(opts.catch_level)(message, metadata)
+
+          case kind do
+            :error -> reraise caught, __STACKTRACE__
+            _ -> reraise kind, caught, __STACKTRACE__
+          end
       end
     end
   end

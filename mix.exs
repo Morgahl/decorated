@@ -8,11 +8,11 @@ defmodule Decorated.MixProject do
       elixir: "~> 1.15",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      dialyzer: dialyzer()
     ]
   end
 
-  # Run "mix help compile.app" to learn about applications.
   def application do
     [
       extra_applications: [:logger]
@@ -23,10 +23,19 @@ defmodule Decorated.MixProject do
   defp elixirc_paths(:test), do: ["lib", "examples", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:decorator, "~> 1.3"}
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false, optional: true},
+      # {:decorator, "~> 1.4"},
+      {:decorator, path: "decorator"},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false, optional: true},
+      {:ex_doc, "~> 0.30", only: [:dev, :example], runtime: false}
+    ]
+  end
+
+  defp dialyzer do
+    [
+      plt_add_deps: :app_tree
     ]
   end
 end

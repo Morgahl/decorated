@@ -1,38 +1,33 @@
 defmodule MyMath do
   @moduledoc """
-  A simple module that demonstrates the Decorated.Logger decorator.
+  A simple module that demonstrates the Decorated.Logger decorator. It's full of arbitrary rules that we don't like and we want to log when
+  they're broken.
+
+  I am making use of macros to build the decorators for... reasons. I'm not sure if this is a good idea or not. I'm also not sure if I'm
+  using the Decorated.Logger decorator correctly.
   """
-
-  @type ok(t) :: {:ok, t}
-  @type err(e) :: {:error, e}
-  @type result(t, e) :: {:ok, t} | {:error, e}
-  @type option(t) :: {:ok, t} | :none
-
-  @spec ok(any()) :: {:ok, any()}
-  defmacrop ok(ok), do: quote(do: {:ok, unquote(ok)})
-
-  @spec err(any()) :: {:error, any()}
-  defmacrop err(error), do: quote(do: {:error, unquote(error)})
-
-  @spec raise_same_value() :: no_return()
-  defmacrop raise_same_value, do: quote(do: raise("do not pass the same value to #{inspect(__MODULE__)} functions"))
-
-  @spec raise_no_strings() :: no_return()
-  defmacrop raise_no_strings, do: quote(do: raise("do not pass strings to #{inspect(__MODULE__)} functions"))
-
-  @spec raise_division_by_zero() :: no_return()
-  defmacrop raise_division_by_zero, do: quote(do: raise("do not divide by zero in #{inspect(__MODULE__)} functions"))
-
   use Decorated, :dbg
   use Decorated, :hooks
   use Decorated, :logger
 
+  import MyMath.Macros
+  alias MyMath.Macros
+
   @decorate dbg_log()
-  @decorate info_log(catch: :error)
   @decorate around(
-              fn -> IO.inspect({a, b}, label: "pre") end,
-              &IO.inspect({a, b, &1, &2}, label: "post")
+              fn -> IO.inspect({}, label: "pre_hook/0") end,
+              fn result, presult -> IO.inspect({result, presult}, label: "post_hook/2") end
             )
+  @decorate around(
+              fn ctx -> IO.inspect({ctx}, label: "pre_hook/1", width: :infinity) end,
+              fn result, presult, ctx -> IO.inspect({result, presult, ctx}, label: "post_hook/3", width: :infinity) end
+            )
+  @decorate info_log(catch: :error, metadata: [foo: :bar])
+
+  @doc """
+  Perform an arbitrary set of math operations on two numbers using the `|>` operator. best use is `dbg_log/0` or `dbg_log/1` to see the
+  result of each operation.
+  """
   @spec debug_me!(number(), number()) :: number()
   def debug_me!(a, b) do
     add!(a, b)
@@ -40,57 +35,87 @@ defmodule MyMath do
     |> divide!(a)
   end
 
-  @decorate_all info_log(catch: :error)
+  @decorate_all info_log(catch: :error, metadata: [foo: :bar])
 
   @doc """
-  Adds two numbers together.
+  Returns true if the given option is `:none`.
   """
-  @spec is_none(option(any())) :: boolean()
-  def is_none(:none), do: :none
+  @spec is_none(Macros.option(any())) :: boolean()
+  def is_none(:none), do: true
   def is_none(_), do: false
 
-  @spec add(number(), number()) :: result(number(), :same_value | :no_strings)
+  @doc """
+  Adds two numbers together. Arbitrarily we hate strings and we hate the same value so we return an error if either of those are passed in.
+  """
+  @spec add(number(), number()) :: Macros.result(number(), :same_value | :no_strings)
   def add(a, b) when is_binary(a) or is_binary(b), do: err(:no_strings)
   def add(a, a), do: err(:same_value)
   def add(a, b), do: ok(a + b)
 
+  @doc """
+  Adds two numbers together. Arbitrarily we hate strings and we hate the same value so we raise an error if either of those are passed in.
+  """
   @spec add!(number(), number()) :: number()
   def add!(a, b) when is_binary(a) or is_binary(b), do: raise_no_strings()
   def add!(a, a), do: raise_same_value()
   def add!(a, b), do: a + b
 
-  @spec sub(number(), number()) :: result(number(), :same_value | :no_strings)
+  @doc """
+  Subtracts two numbers. Arbitrarily we hate strings and we hate the same value so we return an error if either of those are passed in.
+  """
+  @spec sub(number(), number()) :: Macros.result(number(), :same_value | :no_strings)
   def sub(a, b) when is_binary(a) or is_binary(b), do: err(:no_strings)
   def sub(a, a), do: err(:same_value)
   def sub(a, b), do: ok(a - b)
 
+  @doc """
+  Subtracts two numbers. Arbitrarily we hate strings and we hate the same value so we raise an error if either of those are passed in.
+  """
   @spec sub!(number(), number()) :: number()
   def sub!(a, b) when is_binary(a) or is_binary(b), do: raise_no_strings()
   def sub!(a, a), do: raise_same_value()
   def sub!(a, b), do: a - b
 
-  @spec divide(number(), number()) :: result(number(), :division_by_zero | :no_strings)
+  @doc """
+  Divides two numbers. Arbitrarily we hate strings and we hate dividing by zero so we return an error if either of those are passed in.
+  """
+  @spec divide(number(), number()) :: Macros.result(number(), :division_by_zero | :no_strings)
   def divide(a, b) when is_binary(a) or is_binary(b), do: err(:no_strings)
   def divide(_a, 0), do: err(:division_by_zero)
   def divide(a, b), do: ok(a / b)
 
+  @doc """
+  Divides two numbers. Arbitrarily we hate strings and we hate dividing by zero so we raise an error if either of those are passed in.
+  """
   @spec divide!(number(), number()) :: number()
   def divide!(a, b) when is_binary(a) or is_binary(b), do: raise_no_strings()
   def divide!(_a, 0), do: raise_division_by_zero()
   def divide!(a, b), do: a / b
 
-  @spec multiply(number(), number()) :: result(number(), :no_strings)
+  @doc """
+  Multiplies two numbers. Arbitrarily we hate strings so we return an error if either of those are passed in.
+  """
+  @spec multiply(number(), number()) :: Macros.result(number(), :no_strings)
   def multiply(a, b) when is_binary(a) or is_binary(b), do: err(:no_strings)
   def multiply(a, b), do: ok(a * b)
 
+  @doc """
+  Multiplies two numbers. Arbitrarily we hate strings so we raise an error if either of those are passed in.
+  """
   @spec multiply!(number(), number()) :: number()
   def multiply!(a, b) when is_binary(a) or is_binary(b), do: raise_no_strings()
   def multiply!(a, b), do: a * b
 
-  @spec pow(number(), number()) :: result(number(), :no_strings)
+  @doc """
+  Raises a number to a power. Arbitrarily we hate strings so we return an error if either of those are passed in.
+  """
+  @spec pow(number(), number()) :: Macros.result(number(), :no_strings)
   def pow(a, b) when is_binary(a) or is_binary(b), do: err(:no_strings)
   def pow(a, b), do: ok(a ** b)
 
+  @doc """
+  Raises a number to a power. Arbitrarily we hate strings so we raise an error if either of those are passed in.
+  """
   @spec pow!(number(), number()) :: number()
   def pow!(a, b) when is_binary(a) or is_binary(b), do: raise_no_strings()
   def pow!(a, b), do: a ** b
