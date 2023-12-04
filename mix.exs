@@ -16,7 +16,6 @@ defmodule Decorated.MixProject do
       source_url: "https://github.com/Morgahl/decorated",
       homepage_url: "https://morgahl.github.io/decorated/",
       docs: [
-        main: "Decorated",
         extras: ["README.md", "LICENSE"]
       ]
     ]

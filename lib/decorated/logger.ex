@@ -72,99 +72,182 @@ defmodule Decorated.Logger do
 
   @type options() :: [Opts.log_opt()]
 
-  @doc """
-  A decorator that produces a DEBUG level log using the provided message.
+  debug_log =
+    """
+    A decorator that produces a DEBUG level log using the provided message.
 
-  The message has interpolated access to the function arguments by name defined in the imeadiately following function
-  definition.
-  """
+    The message has interpolated access to the function arguments by name defined in the imeadiately following function
+    definition.
+    """
+
+  @doc debug_log
+  defmacro debug_log()
+
+  @doc debug_log
+  defmacro debug_log(opts)
+
+  @doc false
   @spec debug_log() :: no_return()
   @spec debug_log(options()) :: no_return()
   def debug_log(opts \\ [], body, ctx), do: log(:debug, opts, body, ctx)
 
-  @doc """
-  A decorator that produces an INFO level log using the provided message.
+  info_log =
+    """
+    A decorator that produces an INFO level log using the provided message.
 
-  The message has interpolated access to the function arguments by name defined in the imeadiately following function
-  definition.
-  """
+    The message has interpolated access to the function arguments by name defined in the imeadiately following function
+    definition.
+    """
+
+  @doc info_log
+  defmacro info_log()
+
+  @doc info_log
+  defmacro info_log(opts)
+
+  @doc false
   @spec info_log() :: no_return()
   @spec info_log(options()) :: no_return()
   def info_log(opts \\ [], body, ctx), do: log(:info, opts, body, ctx)
 
-  @doc """
-  A decorator that produces a NOTICE level log using the provided message.
+  notice_log =
+    """
+    A decorator that produces a NOTICE level log using the provided message.
 
-  The message has interpolated access to the function arguments by name defined in the imeadiately following function
-  definition.
-  """
+    The message has interpolated access to the function arguments by name defined in the imeadiately following function
+    definition.
+    """
+
+  @doc notice_log
+  defmacro notice_log()
+
+  @doc notice_log
+  defmacro notice_log(opts)
+
+  @doc false
   @spec notice_log() :: no_return()
   @spec notice_log(options()) :: no_return()
   def notice_log(opts \\ [], body, ctx), do: log(:notice, opts, body, ctx)
 
-  @doc """
-  A decorator that produces a WARNING level log using the provided message.
+  warning_log =
+    """
+    A decorator that produces a WARNING level log using the provided message.
 
-  The message has interpolated access to the function arguments by name defined in the imeadiately following function
-  definition.
-  """
+    The message has interpolated access to the function arguments by name defined in the imeadiately following function
+    definition.
+    """
+
+  @doc warning_log
+  defmacro warning_log()
+
+  @doc warning_log
+  defmacro warning_log(opts)
+
+  @doc false
   @spec warning_log() :: no_return()
   @spec warning_log(options()) :: no_return()
   def warning_log(opts \\ [], body, ctx), do: log(:warning, opts, body, ctx)
 
-  @doc """
-  A decorator that produces a ERROR level log using the provided message.
+  error_log =
+    """
+    A decorator that produces a ERROR level log using the provided message.
 
-  The message has interpolated access to the function arguments by name defined in the imeadiately following function
-  definition.
-  """
+    The message has interpolated access to the function arguments by name defined in the imeadiately following function
+    definition.
+    """
+
+  @doc error_log
+  defmacro error_log()
+
+  @doc error_log
+  defmacro error_log(opts)
+
+  @doc false
   @spec error_log() :: no_return()
   @spec error_log(options()) :: no_return()
   def error_log(opts \\ [], body, ctx), do: log(:error, opts, body, ctx)
 
-  @doc """
-  A decorator that produces a CRITICAL level log using the provided message.
+  critical_log =
+    """
+    A decorator that produces a CRITICAL level log using the provided message.
 
-  The message has interpolated access to the function arguments by name defined in the imeadiately following function
-  definition.
-  """
+    The message has interpolated access to the function arguments by name defined in the imeadiately following function
+    definition.
+    """
+
+  @doc critical_log
+  defmacro critical_log()
+
+  @doc critical_log
+  defmacro critical_log(opts)
+
+  @doc false
   @spec critical_log() :: no_return()
   @spec critical_log(options()) :: no_return()
   def critical_log(opts \\ [], body, ctx), do: log(:critical, opts, body, ctx)
 
-  @doc """
-  A decorator that produces a ALERT level log using the provided message.
+  alert_log =
+    """
+    A decorator that produces a ALERT level log using the provided message.
 
-  The message has interpolated access to the function arguments by name defined in the imeadiately following function
-  definition.
-  """
+    The message has interpolated access to the function arguments by name defined in the imeadiately following function
+    definition.
+    """
+
+  @doc alert_log
+  defmacro alert_log()
+
+  @doc alert_log
+  defmacro alert_log(opts)
+
+  @doc false
   @spec alert_log() :: no_return()
   @spec alert_log(options()) :: no_return()
   def alert_log(opts \\ [], body, ctx), do: log(:alert, opts, body, ctx)
 
-  @doc """
-  A decorator that produces a EMERGENCY level log using the provided message.
+  emergency_log =
+    """
+    A decorator that produces a EMERGENCY level log using the provided message.
 
-  The message has interpolated access to the function arguments by name defined in the imeadiately following function
-  definition.
-  """
+    The message has interpolated access to the function arguments by name defined in the imeadiately following function
+    definition.
+    """
+
+  @doc emergency_log
+  defmacro emergency_log()
+
+  @doc emergency_log
+  defmacro emergency_log(opts)
+
+  @doc false
   @spec emergency_log() :: no_return()
   @spec emergency_log(options()) :: no_return()
   def emergency_log(opts \\ [], body, ctx), do: log(:emergency, opts, body, ctx)
 
-  @doc """
-  A decorator that produces no log UNLESS a configuration is provided in which case it produces a log at the provided
-  level using the provided message.
+  silent_log =
+    """
+    A decorator that produces no log UNLESS a configuration is provided in which case it produces a log at the provided
+    level using the provided message.
 
-  The message has interpolated access to the function arguments by name defined in the imeadiately following function
-  definition.
-  """
+    The message has interpolated access to the function arguments by name defined in the imeadiately following function
+    definition.
+    """
+
+  @doc silent_log
+  defmacro silent_log()
+
+  @doc silent_log
+  defmacro silent_log(opts)
+
+  @doc false
   @spec silent_log() :: no_return()
   @spec silent_log(options()) :: no_return()
   def silent_log(opts \\ [], body, ctx), do: log(:silent, opts, body, ctx)
 
+  @doc false
   defmacro silent(_msg \\ nil, _ctx \\ nil), do: nil
 
+  @doc false
   def stringify_args(args) do
     Enum.map_join(args, ", ", fn
       {:ignored, ignored} -> ignored
@@ -214,7 +297,6 @@ defmodule Decorated.Logger do
 
   defguardp is_valid_message?(message) when is_binary(message) or (is_tuple(message) and elem(message, 0) == :<<>>)
 
-  # credo:disable-for-next-line Credo.Check.Refactor.CyclomaticComplexity
   defp log(log_level, opts, body, ctx) do
     opts = Opts.build!(log_level, opts, ctx)
     {logger_imports, silent_import} = build_logger_imports(log_level, opts)
@@ -229,14 +311,9 @@ defmodule Decorated.Logger do
 
       message_fn ->
         case get_ast_function_arity!(message_fn) do
-          1 ->
-            log_msg_func_1(log_level, opts, {logger_imports, silent_import}, body, ctx, message_fn)
-
-          2 ->
-            log_msg_func_2(log_level, opts, {logger_imports, silent_import}, body, ctx, message_fn)
-
-          _ ->
-            raise_error("The message function must be arity of 1 or 2", file: ctx.file, line: get_ast_line_location!(message_fn))
+          1 -> log_msg_func_1(log_level, opts, {logger_imports, silent_import}, body, ctx, message_fn)
+          2 -> log_msg_func_2(log_level, opts, {logger_imports, silent_import}, body, ctx, message_fn)
+          _ -> raise_error("The message function must be arity of 1 or 2", file: ctx.file, line: get_ast_line_location!(message_fn))
         end
     end
   end

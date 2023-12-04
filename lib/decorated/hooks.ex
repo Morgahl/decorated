@@ -69,6 +69,9 @@ defmodule Decorated.Hooks do
       #> pre: {1, 2, %Context{args: [1, 2], file: "lib/my_math.ex", line: 23}}
       3
   """
+  defmacro pre(pre_hook)
+
+  @doc false
   @spec pre((-> no_return()) | (Context.t() -> no_return())) :: no_return()
   def pre(pre_hook, body, ctx) do
     case get_ast_function_arity!(pre_hook) do
@@ -101,6 +104,9 @@ defmodule Decorated.Hooks do
       #> post: {1, 2, 3, {1, 2}}
       3
   """
+  defmacro post(post_hook)
+
+  @doc false
   @spec post((result :: any() -> no_return()) | (result :: any(), Context.t() -> no_return())) :: no_return()
   def post(post_hook, body, %Context{} = ctx) do
     case get_ast_function_arity!(post_hook) do
@@ -139,6 +145,9 @@ defmodule Decorated.Hooks do
       #> post: {1, 2, 3, {1, 2, %Context{args: [1, 2], file: "lib/my_math.ex", line: 23}}}
       3
   """
+  defmacro around(pre_hook, post_hook)
+
+  @doc false
   @spec around((-> presult) | (ctx -> presult), (result, presult -> no_return()) | (result, presult, ctx -> no_return())) :: no_return()
         when result: any(), presult: any(), ctx: Context.t()
   def around(pre_hook, post_hook, body, %Context{} = ctx) do

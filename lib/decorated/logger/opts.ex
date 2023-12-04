@@ -123,9 +123,7 @@ defmodule Decorated.Logger.Opts do
 
   defguardp valid_message?(message) when is_nil(message) or is_binary(message) or (is_tuple(message) and elem(message, 0) == :<<>>)
 
-  @doc """
-  Builds a `Decorated.Logger.Opts` struct from the given options.
-  """
+  @doc false
   def build!(level, opts, %Context{} = ctx) when level in @levels do
     with msg when valid_message?(msg) <- Keyword.get(opts, :message),
          none_level when none_level in @levels <- Keyword.get(opts, :none, level),
