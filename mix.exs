@@ -37,7 +37,7 @@ defmodule Decorated.MixProject do
       # {:decorator, "~> 1.4"},
       {:decorator, path: "decorator"},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false, optional: true},
-      {:ex_doc, "~> 0.30", only: [:dev, :example], runtime: false}
+      {:ex_doc, "~> 0.30", only: :dev, runtime: false, optional: true}
     ]
   end
 
