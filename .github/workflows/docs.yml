@@ -1,0 +1,29 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docs:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    name: Generate project documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sets up an Erlang/OTP environment
+        uses: erlef/setup-beam@v1
+        with:
+          version-file: .tool-versions
+          version-type: strict
+
+      - name: Build docs
+        uses: lee-dohm/generate-elixir-docs@v1.0.1
+
+      - name: Publish to Pages
+        uses: peaceiris/actions-gh-pages@v3.9.3
+        with:
+          deploy_key: ${{ secrets.DOCS_DEPLOY_KEY }}
+          publish_dir: ./doc
+          publish_branch: gh-pages
