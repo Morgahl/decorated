@@ -1,6 +1,8 @@
 # Decorated
 
-**TODO: Add description**
+A collection of Decorators.
+
+Documentation can be found at: https://morgahl.github.io/decorated (it currently follows `main`)
 
 ## Installation
 
@@ -10,12 +12,26 @@ by adding `decorated` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:decorated, "~> 0.1.0"}
+    # No `:ref`` is currently specified as `main` is the only branch and no version has been cut yet
+    {:decorated, github: "morgahl/decorated"}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/decorated>.
+## Examples
 
+Currently the only example of this library is `MyMath` located in `examples/`.
+
+### MyMath
+
+This example is just a really terrible wrapper around math operations with arbitrary failure conditions for the `Decorated.Logger` to trigger from.
+
+```sh
+$ MIX_ENV=examples mix run examples/my_math.exs
+```
+OR
+```ex
+$ MIX_ENV=examples iex -S mix
+
+iex> MyMath.debug_me! 42, 3.33
+```
