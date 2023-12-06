@@ -13,7 +13,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
-    <script src="dist/sidebar_items-64A8B9FB.js"></script>
+    <script src="dist/sidebar_items-93814443.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -129,40 +129,39 @@ Pages
   </a>
   <span class="text">Option</span>
 </h2>
-<ul><li><code class="inline">:message</code> - <code class="inline">message_opt()</code> - The message to log. This can be a string, a binary, or an IO list.</li><li><code class="inline">:none</code> - <code class="inline">log_level()</code> - The log level to use when the decorated function returns <code class="inline">:none</code>. Defaults to the same level as the decorating log level.</li><li><code class="inline">:error</code> - <code class="inline">log_level()</code> - The log level to use when the decorated function returns <code class="inline">:error</code> or <code class="inline">{:error, _}</code>. Defaults to the same level as the decorating log level.</li><li><code class="inline">:catch</code> - <code class="inline">log_level()</code> - The log level to use when the decorated function raises an <code class="inline">Exception.kind()</code>. Defaults to the same level as the decorating log level.</li><li><code class="inline">:ignored</code> - <code class="inline">ignore_behaviour()</code> - The behaviour to use when the decorated function has an ignored argument ex. <code class="inline">_</code> or <code class="inline">_ignored</code>.
-Defaults to <code class="inline">:rename</code>.<ul><li><code class="inline">:drop</code> - Drop the ignored argument from the log message. <code class="inline">foo(_, _a, bar)(nil, nil, :ok)</code> =&gt; <code class="inline">foo(:ok)</code></li><li><code class="inline">:rename</code> - Rename the ignored argument in the log message. <code class="inline">foo(_, _a, bar)(nil, nil, :ok)</code> =&gt; <code class="inline">foo(_, _a, :ok)</code></li><li><code class="inline">:keep</code> - Keep the ignored argument in the log message. <code class="inline">foo(_, _a, bar)(nil, nil, :ok)</code> =&gt; <code class="inline">foo(nil, nil, :ok)</code></li></ul></li><li><code class="inline">:metadata</code> - <code class="inline">Keyword.t()</code> - The metadata to include in the log message. Injects the <code class="inline">:line</code> metadata by default.</li></ul><h2 id="module-example" class="section-heading">
+<ul><li><code class="inline">:message</code> - <code class="inline">Decorated.Logger.Opts.message()</code> - The message to log. This can be a string, a binary, or an IO list.</li><li><code class="inline">:none</code> - <code class="inline">Decorated.Logger.Opts.log_level()</code> - The log level to use when the decorated function returns <code class="inline">:none</code>. Defaults to the same level as the decorating log level.</li><li><code class="inline">:error</code> - <code class="inline">Decorated.Logger.Opts.log_level()</code> - The log level to use when the decorated function returns <code class="inline">:error</code> or <code class="inline">{:error, _}</code>. Defaults to the same level as the decorating log level.</li><li><code class="inline">:catch</code> - <code class="inline">Decorated.Logger.Opts.log_level()</code> - The log level to use when the decorated function raises an <code class="inline">Exception.kind()</code>. Defaults to the same level as the decorating log level.</li><li><code class="inline">:ignored</code> - <code class="inline">Decorated.Logger.Opts.ignore_behaviour()</code> - The behaviour to use when the decorated function has an ignored argument ex. <code class="inline">_</code> or <code class="inline">_ignored</code>. Defaults to <code class="inline">:rename</code>.<ul><li><code class="inline">:drop</code> - Drop the ignored argument from the log message. <code class="inline">foo(_, _a, bar)(nil, nil, :ok)</code> =&gt; <code class="inline">foo(:ok)</code></li><li><code class="inline">:rename</code> - Rename the ignored argument in the log message. <code class="inline">foo(_, _a, bar)(nil, nil, :ok)</code> =&gt; <code class="inline">foo(_, _a, :ok)</code></li><li><code class="inline">:keep</code> - Keep the ignored argument in the log message. <code class="inline">foo(_, _a, bar)(nil, nil, :ok)</code> =&gt; <code class="inline">foo(nil, nil, :ok)</code></li></ul></li><li><code class="inline">:metadata</code> - <code class="inline">Keyword.t()</code> - The metadata to include in the log message. Injects the <code class="inline">:line</code> metadata by default.</li></ul><h2 id="module-example" class="section-heading">
   <a href="#module-example" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
   <span class="text">Example</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyMath</span><span class="w"> </span><span class="k" data-group-id="5529353517-1">do</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyMath</span><span class="w"> </span><span class="k" data-group-id="0222179646-1">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Decorated.Logger</span><span class="w">
 
-  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">info_log</span><span class="p" data-group-id="5529353517-2">(</span><span class="ss">catch</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p" data-group-id="5529353517-2">)</span><span class="w">
-  </span><span class="na">@spec</span><span class="w"> </span><span class="n">add</span><span class="p" data-group-id="5529353517-3">(</span><span class="n">number</span><span class="p" data-group-id="5529353517-4">(</span><span class="p" data-group-id="5529353517-4">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="5529353517-5">(</span><span class="p" data-group-id="5529353517-5">)</span><span class="p" data-group-id="5529353517-3">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="5529353517-6">(</span><span class="p" data-group-id="5529353517-6">)</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">add</span><span class="p" data-group-id="5529353517-7">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="5529353517-7">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5529353517-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="5529353517-8">}</span><span class="w">
+  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">info_log</span><span class="p" data-group-id="0222179646-2">(</span><span class="ss">catch</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p" data-group-id="0222179646-2">)</span><span class="w">
+  </span><span class="na">@spec</span><span class="w"> </span><span class="n">add</span><span class="p" data-group-id="0222179646-3">(</span><span class="n">number</span><span class="p" data-group-id="0222179646-4">(</span><span class="p" data-group-id="0222179646-4">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0222179646-5">(</span><span class="p" data-group-id="0222179646-5">)</span><span class="p" data-group-id="0222179646-3">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0222179646-6">(</span><span class="p" data-group-id="0222179646-6">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">add</span><span class="p" data-group-id="0222179646-7">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="0222179646-7">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0222179646-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="0222179646-8">}</span><span class="w">
 
-  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">debug_log</span><span class="p" data-group-id="5529353517-9">(</span><span class="ss">error</span><span class="p">:</span><span class="w"> </span><span class="ss">:critical</span><span class="p" data-group-id="5529353517-9">)</span><span class="w">
-  </span><span class="na">@spec</span><span class="w"> </span><span class="n">sub</span><span class="p" data-group-id="5529353517-10">(</span><span class="n">number</span><span class="p" data-group-id="5529353517-11">(</span><span class="p" data-group-id="5529353517-11">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="5529353517-12">(</span><span class="p" data-group-id="5529353517-12">)</span><span class="p" data-group-id="5529353517-10">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="5529353517-13">(</span><span class="p" data-group-id="5529353517-13">)</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">sub</span><span class="p" data-group-id="5529353517-14">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="5529353517-14">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5529353517-15">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="5529353517-15">}</span><span class="w">
+  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">debug_log</span><span class="p" data-group-id="0222179646-9">(</span><span class="ss">error</span><span class="p">:</span><span class="w"> </span><span class="ss">:critical</span><span class="p" data-group-id="0222179646-9">)</span><span class="w">
+  </span><span class="na">@spec</span><span class="w"> </span><span class="n">sub</span><span class="p" data-group-id="0222179646-10">(</span><span class="n">number</span><span class="p" data-group-id="0222179646-11">(</span><span class="p" data-group-id="0222179646-11">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0222179646-12">(</span><span class="p" data-group-id="0222179646-12">)</span><span class="p" data-group-id="0222179646-10">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0222179646-13">(</span><span class="p" data-group-id="0222179646-13">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">sub</span><span class="p" data-group-id="0222179646-14">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="0222179646-14">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0222179646-15">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="0222179646-15">}</span><span class="w">
 
-  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">critical_log</span><span class="p" data-group-id="5529353517-16">(</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="k" data-group-id="5529353517-17">fn</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;multiply() -&gt; %{result}&quot;</span><span class="w"> </span><span class="k" data-group-id="5529353517-17">end</span><span class="p" data-group-id="5529353517-16">)</span><span class="w">
-  </span><span class="na">@spec</span><span class="w"> </span><span class="n">multiply</span><span class="p" data-group-id="5529353517-18">(</span><span class="n">number</span><span class="p" data-group-id="5529353517-19">(</span><span class="p" data-group-id="5529353517-19">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="5529353517-20">(</span><span class="p" data-group-id="5529353517-20">)</span><span class="p" data-group-id="5529353517-18">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="5529353517-21">(</span><span class="p" data-group-id="5529353517-21">)</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p" data-group-id="5529353517-22">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="5529353517-22">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5529353517-23">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="5529353517-23">}</span><span class="w">
-</span><span class="k" data-group-id="5529353517-1">end</span><span class="w">
+  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">critical_log</span><span class="p" data-group-id="0222179646-16">(</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="k" data-group-id="0222179646-17">fn</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;multiply() -&gt; %{result}&quot;</span><span class="w"> </span><span class="k" data-group-id="0222179646-17">end</span><span class="p" data-group-id="0222179646-16">)</span><span class="w">
+  </span><span class="na">@spec</span><span class="w"> </span><span class="n">multiply</span><span class="p" data-group-id="0222179646-18">(</span><span class="n">number</span><span class="p" data-group-id="0222179646-19">(</span><span class="p" data-group-id="0222179646-19">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0222179646-20">(</span><span class="p" data-group-id="0222179646-20">)</span><span class="p" data-group-id="0222179646-18">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="0222179646-21">(</span><span class="p" data-group-id="0222179646-21">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p" data-group-id="0222179646-22">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="0222179646-22">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0222179646-23">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="0222179646-23">}</span><span class="w">
+</span><span class="k" data-group-id="0222179646-1">end</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">add</span><span class="p" data-group-id="5529353517-24">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5529353517-24">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">add</span><span class="p" data-group-id="0222179646-24">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0222179646-24">)</span><span class="w">
 </span><span class="c1">#&gt; 23:14:44.410 [info] MyMath.add!(1, 2) -&gt; {:ok, 3}</span><span class="w">
-</span><span class="p" data-group-id="5529353517-25">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="5529353517-25">}</span><span class="w">
+</span><span class="p" data-group-id="0222179646-25">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="0222179646-25">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">sub</span><span class="p" data-group-id="5529353517-26">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5529353517-26">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">sub</span><span class="p" data-group-id="0222179646-26">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0222179646-26">)</span><span class="w">
 </span><span class="c1">#&gt; 23:14:44.410 [debug] sub() -&gt; -1</span><span class="w">
-</span><span class="p" data-group-id="5529353517-27">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p" data-group-id="5529353517-27">}</span><span class="w">
+</span><span class="p" data-group-id="0222179646-27">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p" data-group-id="0222179646-27">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">multiply</span><span class="p" data-group-id="5529353517-28">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5529353517-28">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">multiply</span><span class="p" data-group-id="0222179646-28">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0222179646-28">)</span><span class="w">
 </span><span class="c1">#&gt; 23:14:44.410 [critical] multiply() -&gt; 2</span><span class="w">
-</span><span class="p" data-group-id="5529353517-29">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5529353517-29">}</span></code></pre>
+</span><span class="p" data-group-id="0222179646-29">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0222179646-29">}</span></code></pre>
   </section>
 
 
@@ -200,19 +199,21 @@ Defaults to <code class="inline">:rename</code>.<ul><li><code class="inline">:dr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#t:log_opt/0" translate="no">log_opt()</a>
+        <a href="#t:message/0" translate="no">message()</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>The log level configuration, message, and metadata, and log level overides for common divergent scenarios.</p></div>
+        <div class="summary-synopsis"><p>The message to log.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#t:message_opt/0" translate="no">message_opt()</a>
+        <a href="#t:options/0" translate="no">options()</a>
 
       </div>
+
+        <div class="summary-synopsis"><p>The log level configuration, message, and metadata, and log level overides for common divergent scenarios.</p></div>
 
     </div>
 
@@ -238,7 +239,7 @@ Defaults to <code class="inline">:rename</code>.<ul><li><code class="inline">:dr
     </a>
     <h1 class="signature" translate="no">ignore_behaviour()</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger/opts.ex#L116" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger/opts.ex#L133" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -266,7 +267,7 @@ Defaults to <code class="inline">:rename</code>.<ul><li><code class="inline">:dr
     </a>
     <h1 class="signature" translate="no">level()</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger/opts.ex#L80" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger/opts.ex#L79" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -285,16 +286,16 @@ Defaults to <code class="inline">:rename</code>.<ul><li><code class="inline">:dr
 <p>The log level to use for a given configuration.</p><p>In addition to the standard log levels provided by <a href="https://hexdocs.pm/logger/Logger.html"><code class="inline">Logger</code></a>, the following log levels are also supported:</p><ul><li><code class="inline">:silent</code> - Do not log the decorated function.</li></ul>
   </section>
 </section>
-<section class="detail" id="t:log_opt/0">
+<section class="detail" id="t:message/0">
 
   <div class="detail-header">
-    <a href="#t:log_opt/0" class="detail-link" title="Link to this type">
+    <a href="#t:message/0" class="detail-link" title="Link to this type">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this type</span>
     </a>
-    <h1 class="signature" translate="no">log_opt()</h1>
+    <h1 class="signature" translate="no">message()</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger/opts.ex#L101" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger/opts.ex#L96" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -306,55 +307,66 @@ Defaults to <code class="inline">:rename</code>.<ul><li><code class="inline">:dr
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@type</span> log_opt() ::
-  <a href="#t:message_opt/0">message_opt</a>()
+          <pre translate="no"><span class="attribute">@type</span> message() ::
+  {:message,
+   <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()
+   | (result :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>() -&gt; <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>())
+   | (result :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), <a href="https://hexdocs.pm/decorator/1.4.0/Decorator.Decorate.Context.html#t:t/0">Decorator.Decorate.Context.t</a>() -&gt; <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>())}</pre>
+
+      </div>
+
+<p>The message to log.</p><p>This can be a string, a binary, or an IO list, but it must be a valid message for <code class="inline">Logger.log/4</code>. Additionally it can be a function that
+takes the result of the decorated function and optionally the Decorator's context and returns a valid message for <code class="inline">Logger.log/4</code>.</p><h2 id="t:message/0-example" class="section-heading">
+  <a href="#t:message/0-example" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Example</span>
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="n">info_log</span><span class="p" data-group-id="7992816618-1">(</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;foo(</span><span class="si" data-group-id="7992816618-2">#{</span><span class="n">bar</span><span class="si" data-group-id="7992816618-2">}</span><span class="s">)&quot;</span><span class="p" data-group-id="7992816618-1">)</span><span class="w">
+</span><span class="n">info_log</span><span class="p" data-group-id="7992816618-3">(</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="k" data-group-id="7992816618-4">fn</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;foo(</span><span class="si" data-group-id="7992816618-5">#{</span><span class="n">bar</span><span class="si" data-group-id="7992816618-5">}</span><span class="s">) -&gt; </span><span class="si" data-group-id="7992816618-6">#{</span><span class="n">result</span><span class="si" data-group-id="7992816618-6">}</span><span class="s">&quot;</span><span class="w"> </span><span class="k" data-group-id="7992816618-4">end</span><span class="p" data-group-id="7992816618-3">)</span><span class="w">
+</span><span class="n">info_log</span><span class="p" data-group-id="7992816618-7">(</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="k" data-group-id="7992816618-8">fn</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;foo(</span><span class="si" data-group-id="7992816618-9">#{</span><span class="n">bar</span><span class="si" data-group-id="7992816618-9">}</span><span class="s">) -&gt; </span><span class="si" data-group-id="7992816618-10">#{</span><span class="n">result</span><span class="si" data-group-id="7992816618-10">}</span><span class="s"> (</span><span class="si" data-group-id="7992816618-11">#{</span><span class="n">inspect</span><span class="p" data-group-id="7992816618-12">(</span><span class="n">ctx</span><span class="p" data-group-id="7992816618-12">)</span><span class="si" data-group-id="7992816618-11">}</span><span class="s">)&quot;</span><span class="w"> </span><span class="k" data-group-id="7992816618-8">end</span><span class="p" data-group-id="7992816618-7">)</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">foo</span><span class="p" data-group-id="7992816618-13">(</span><span class="n">bar</span><span class="p" data-group-id="7992816618-13">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">bar</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="t:options/0">
+
+  <div class="detail-header">
+    <a href="#t:options/0" class="detail-link" title="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature" translate="no">options()</h1>
+
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger/opts.ex#L117" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> options() :: [
+  <a href="#t:message/0">message</a>()
   | {:none, <a href="#t:level/0">level</a>()}
   | {:error, <a href="#t:level/0">level</a>()}
   | {:catch, <a href="#t:level/0">level</a>()}
   | {:ignored, <a href="#t:ignore_behaviour/0">ignore_behaviour</a>()}
-  | {:metadata, <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()}</pre>
+  | {:metadata, <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()}
+]</pre>
 
       </div>
 
-<p>The log level configuration, message, and metadata, and log level overides for common divergent scenarios.</p><h2 id="t:log_opt/0-option" class="section-heading">
-  <a href="#t:log_opt/0-option" class="hover-link">
+<p>The log level configuration, message, and metadata, and log level overides for common divergent scenarios.</p><h2 id="t:options/0-option" class="section-heading">
+  <a href="#t:options/0-option" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
   <span class="text">Option</span>
 </h2>
-<ul><li><code class="inline">:message</code> - <code class="inline">message_opt()</code> - The message to log. This can be a string, a binary, or an IO list.</li><li><code class="inline">:none</code> - <code class="inline">log_level()</code> - The log level to use when the decorated function returns <code class="inline">:none</code>. Defaults to the same level as the decorating log level.</li><li><code class="inline">:error</code> - <code class="inline">log_level()</code> - The log level to use when the decorated function returns <code class="inline">:error</code> or <code class="inline">{:error, _}</code>. Defaults to the same level as the decorating log level.</li><li><code class="inline">:catch</code> - <code class="inline">log_level()</code> - The log level to use when the decorated function raises an <code class="inline">Exception.kind()</code>. Defaults to the same level as the decorating log level.</li><li><code class="inline">:ignored</code> - <code class="inline">ignore_behaviour()</code> - The behaviour to use when the decorated function has an ignored argument ex. <code class="inline">_</code> or <code class="inline">_ignored</code>. Defaults to <code class="inline">:rename</code>.<ul><li><code class="inline">:drop</code> - Drop the ignored argument from the log message. <code class="inline">foo(_, _a, bar)(nil, nil, :ok)</code> =&gt; <code class="inline">foo(:ok)</code></li><li><code class="inline">:rename</code> - Rename the ignored argument in the log message. <code class="inline">foo(_, _a, bar)(nil, nil, :ok)</code> =&gt; <code class="inline">foo(_, _a, :ok)</code></li><li><code class="inline">:keep</code> - Keep the ignored argument in the log message. <code class="inline">foo(_, _a, bar)(nil, nil, :ok)</code> =&gt; <code class="inline">foo(nil, nil, :ok)</code></li></ul></li><li><code class="inline">:metadata</code> - <code class="inline">Keyword.t()</code> - The metadata to include in the log message. Injects the <code class="inline">:line</code> metadata by default.</li></ul>
-  </section>
-</section>
-<section class="detail" id="t:message_opt/0">
-
-  <div class="detail-header">
-    <a href="#t:message_opt/0" class="detail-link" title="Link to this type">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this type</span>
-    </a>
-    <h1 class="signature" translate="no">message_opt()</h1>
-
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger/opts.ex#L84" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@type</span> message_opt() ::
-  {:message,
-   <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()
-   | (<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>() -&gt; <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>())
-   | (<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), <a href="https://hexdocs.pm/decorator/1.4.0/Decorator.Decorate.Context.html#t:t/0">Decorator.Decorate.Context.t</a>() -&gt; <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>())}</pre>
-
-      </div>
-
-
+<ul><li><code class="inline">:message</code> - <code class="inline">Decorated.Logger.Opts.message()</code> - The message to log. This can be a string, a binary, or an IO list.</li><li><code class="inline">:none</code> - <code class="inline">Decorated.Logger.Opts.log_level()</code> - The log level to use when the decorated function returns <code class="inline">:none</code>. Defaults to the same level as the decorating log level.</li><li><code class="inline">:error</code> - <code class="inline">Decorated.Logger.Opts.log_level()</code> - The log level to use when the decorated function returns <code class="inline">:error</code> or <code class="inline">{:error, _}</code>. Defaults to the same level as the decorating log level.</li><li><code class="inline">:catch</code> - <code class="inline">Decorated.Logger.Opts.log_level()</code> - The log level to use when the decorated function raises an <code class="inline">Exception.kind()</code>. Defaults to the same level as the decorating log level.</li><li><code class="inline">:ignored</code> - <code class="inline">Decorated.Logger.Opts.ignore_behaviour()</code> - The behaviour to use when the decorated function has an ignored argument ex. <code class="inline">_</code> or <code class="inline">_ignored</code>. Defaults to <code class="inline">:rename</code>.<ul><li><code class="inline">:drop</code> - Drop the ignored argument from the log message. <code class="inline">foo(_, _a, bar)(nil, nil, :ok)</code> =&gt; <code class="inline">foo(:ok)</code></li><li><code class="inline">:rename</code> - Rename the ignored argument in the log message. <code class="inline">foo(_, _a, bar)(nil, nil, :ok)</code> =&gt; <code class="inline">foo(_, _a, :ok)</code></li><li><code class="inline">:keep</code> - Keep the ignored argument in the log message. <code class="inline">foo(_, _a, bar)(nil, nil, :ok)</code> =&gt; <code class="inline">foo(nil, nil, :ok)</code></li></ul></li><li><code class="inline">:metadata</code> - <code class="inline">Keyword.t()</code> - The metadata to include in the log message. Injects the <code class="inline">:line</code> metadata by default.</li></ul>
   </section>
 </section>
 

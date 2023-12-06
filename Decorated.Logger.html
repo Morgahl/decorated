@@ -13,7 +13,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
-    <script src="dist/sidebar_items-64A8B9FB.js"></script>
+    <script src="dist/sidebar_items-93814443.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -123,49 +123,55 @@ Pages
 
 
   <section id="moduledoc">
-<p>A simple decorator that takes a message and logs the function name, arguments, and result of a function call.</p><h2 id="module-example" class="section-heading">
+<p>A simple decorator that takes a message and logs the function name, arguments, and result of a function call.</p><h2 id="module-options" class="section-heading">
+  <a href="#module-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p><h2 id="module-example" class="section-heading">
   <a href="#module-example" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
   <span class="text">Example</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyMath</span><span class="w"> </span><span class="k" data-group-id="1741349086-1">do</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyMath</span><span class="w"> </span><span class="k" data-group-id="2613175902-1">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Decorated.Logger</span><span class="w">
 
-  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">info_log</span><span class="p" data-group-id="1741349086-2">(</span><span class="ss">catch</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p" data-group-id="1741349086-2">)</span><span class="w">
-  </span><span class="na">@spec</span><span class="w"> </span><span class="n">add</span><span class="p" data-group-id="1741349086-3">(</span><span class="n">number</span><span class="p" data-group-id="1741349086-4">(</span><span class="p" data-group-id="1741349086-4">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="1741349086-5">(</span><span class="p" data-group-id="1741349086-5">)</span><span class="p" data-group-id="1741349086-3">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="1741349086-6">(</span><span class="p" data-group-id="1741349086-6">)</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">add</span><span class="p" data-group-id="1741349086-7">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="1741349086-7">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1741349086-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="1741349086-8">}</span><span class="w">
+  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">info_log</span><span class="p" data-group-id="2613175902-2">(</span><span class="ss">catch</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p" data-group-id="2613175902-2">)</span><span class="w">
+  </span><span class="na">@spec</span><span class="w"> </span><span class="n">add</span><span class="p" data-group-id="2613175902-3">(</span><span class="n">number</span><span class="p" data-group-id="2613175902-4">(</span><span class="p" data-group-id="2613175902-4">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="2613175902-5">(</span><span class="p" data-group-id="2613175902-5">)</span><span class="p" data-group-id="2613175902-3">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="2613175902-6">(</span><span class="p" data-group-id="2613175902-6">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">add</span><span class="p" data-group-id="2613175902-7">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="2613175902-7">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2613175902-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="2613175902-8">}</span><span class="w">
 
-  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">debug_log</span><span class="p" data-group-id="1741349086-9">(</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="k" data-group-id="1741349086-10">fn</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;sub() -&gt; %{result}&quot;</span><span class="w"> </span><span class="k" data-group-id="1741349086-10">end</span><span class="p" data-group-id="1741349086-9">)</span><span class="w">
-  </span><span class="na">@spec</span><span class="w"> </span><span class="n">sub</span><span class="p" data-group-id="1741349086-11">(</span><span class="n">number</span><span class="p" data-group-id="1741349086-12">(</span><span class="p" data-group-id="1741349086-12">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="1741349086-13">(</span><span class="p" data-group-id="1741349086-13">)</span><span class="p" data-group-id="1741349086-11">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="1741349086-14">(</span><span class="p" data-group-id="1741349086-14">)</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">sub</span><span class="p" data-group-id="1741349086-15">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="1741349086-15">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1741349086-16">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="1741349086-16">}</span><span class="w">
+  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">debug_log</span><span class="p" data-group-id="2613175902-9">(</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="k" data-group-id="2613175902-10">fn</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;sub() -&gt; %{result}&quot;</span><span class="w"> </span><span class="k" data-group-id="2613175902-10">end</span><span class="p" data-group-id="2613175902-9">)</span><span class="w">
+  </span><span class="na">@spec</span><span class="w"> </span><span class="n">sub</span><span class="p" data-group-id="2613175902-11">(</span><span class="n">number</span><span class="p" data-group-id="2613175902-12">(</span><span class="p" data-group-id="2613175902-12">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="2613175902-13">(</span><span class="p" data-group-id="2613175902-13">)</span><span class="p" data-group-id="2613175902-11">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="2613175902-14">(</span><span class="p" data-group-id="2613175902-14">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">sub</span><span class="p" data-group-id="2613175902-15">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="2613175902-15">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2613175902-16">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="2613175902-16">}</span><span class="w">
 
-  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">warning_log</span><span class="p" data-group-id="1741349086-17">(</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="k" data-group-id="1741349086-18">fn</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;multiply() -&gt; %{result}&quot;</span><span class="w"> </span><span class="k" data-group-id="1741349086-18">end</span><span class="p" data-group-id="1741349086-17">)</span><span class="w">
-  </span><span class="na">@spec</span><span class="w"> </span><span class="n">multiply</span><span class="p" data-group-id="1741349086-19">(</span><span class="n">number</span><span class="p" data-group-id="1741349086-20">(</span><span class="p" data-group-id="1741349086-20">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="1741349086-21">(</span><span class="p" data-group-id="1741349086-21">)</span><span class="p" data-group-id="1741349086-19">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="1741349086-22">(</span><span class="p" data-group-id="1741349086-22">)</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p" data-group-id="1741349086-23">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="1741349086-23">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1741349086-24">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="1741349086-24">}</span><span class="w">
+  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">warning_log</span><span class="p" data-group-id="2613175902-17">(</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="k" data-group-id="2613175902-18">fn</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;multiply() -&gt; %{result}&quot;</span><span class="w"> </span><span class="k" data-group-id="2613175902-18">end</span><span class="p" data-group-id="2613175902-17">)</span><span class="w">
+  </span><span class="na">@spec</span><span class="w"> </span><span class="n">multiply</span><span class="p" data-group-id="2613175902-19">(</span><span class="n">number</span><span class="p" data-group-id="2613175902-20">(</span><span class="p" data-group-id="2613175902-20">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="2613175902-21">(</span><span class="p" data-group-id="2613175902-21">)</span><span class="p" data-group-id="2613175902-19">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="2613175902-22">(</span><span class="p" data-group-id="2613175902-22">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p" data-group-id="2613175902-23">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="2613175902-23">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2613175902-24">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="2613175902-24">}</span><span class="w">
 
-  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">silent_log</span><span class="p" data-group-id="1741349086-25">(</span><span class="ss">catch</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p" data-group-id="1741349086-25">)</span><span class="w">
-  </span><span class="na">@spec</span><span class="w"> </span><span class="n">divide!</span><span class="p" data-group-id="1741349086-26">(</span><span class="n">number</span><span class="p" data-group-id="1741349086-27">(</span><span class="p" data-group-id="1741349086-27">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="1741349086-28">(</span><span class="p" data-group-id="1741349086-28">)</span><span class="p" data-group-id="1741349086-26">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="1741349086-29">(</span><span class="p" data-group-id="1741349086-29">)</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">divide!</span><span class="p" data-group-id="1741349086-30">(</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="1741349086-30">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="k">raise</span><span class="p" data-group-id="1741349086-31">(</span><span class="s">&quot;do not divide by zero in MyMath functions&quot;</span><span class="p" data-group-id="1741349086-31">)</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">divide!</span><span class="p" data-group-id="1741349086-32">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="1741349086-32">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">b</span><span class="w">
-</span><span class="k" data-group-id="1741349086-1">end</span><span class="w">
+  </span><span class="na">@decorate</span><span class="w"> </span><span class="n">silent_log</span><span class="p" data-group-id="2613175902-25">(</span><span class="ss">catch</span><span class="p">:</span><span class="w"> </span><span class="ss">:error</span><span class="p" data-group-id="2613175902-25">)</span><span class="w">
+  </span><span class="na">@spec</span><span class="w"> </span><span class="n">divide!</span><span class="p" data-group-id="2613175902-26">(</span><span class="n">number</span><span class="p" data-group-id="2613175902-27">(</span><span class="p" data-group-id="2613175902-27">)</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="2613175902-28">(</span><span class="p" data-group-id="2613175902-28">)</span><span class="p" data-group-id="2613175902-26">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">number</span><span class="p" data-group-id="2613175902-29">(</span><span class="p" data-group-id="2613175902-29">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">divide!</span><span class="p" data-group-id="2613175902-30">(</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="2613175902-30">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="k">raise</span><span class="p" data-group-id="2613175902-31">(</span><span class="s">&quot;do not divide by zero in MyMath functions&quot;</span><span class="p" data-group-id="2613175902-31">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">divide!</span><span class="p" data-group-id="2613175902-32">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p" data-group-id="2613175902-32">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">b</span><span class="w">
+</span><span class="k" data-group-id="2613175902-1">end</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">add</span><span class="p" data-group-id="1741349086-33">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="1741349086-33">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">add</span><span class="p" data-group-id="2613175902-33">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2613175902-33">)</span><span class="w">
 </span><span class="c1">#&gt; 23:14:44.410 [info] MyMath.add!(1, 2) -&gt;</span><span class="w">
-</span><span class="p" data-group-id="1741349086-34">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="1741349086-34">}</span><span class="w">
+</span><span class="p" data-group-id="2613175902-34">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="2613175902-34">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">sub</span><span class="p" data-group-id="1741349086-35">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="1741349086-35">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">sub</span><span class="p" data-group-id="2613175902-35">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2613175902-35">)</span><span class="w">
 </span><span class="c1">#&gt; 23:14:44.410 [debug] sub() -&gt; -1</span><span class="w">
-</span><span class="p" data-group-id="1741349086-36">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p" data-group-id="1741349086-36">}</span><span class="w">
+</span><span class="p" data-group-id="2613175902-36">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p" data-group-id="2613175902-36">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">multiply</span><span class="p" data-group-id="1741349086-37">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="1741349086-37">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">multiply</span><span class="p" data-group-id="2613175902-37">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2613175902-37">)</span><span class="w">
 </span><span class="c1">#&gt; 23:14:44.410 [warning] multiply() -&gt; 2</span><span class="w">
-</span><span class="p" data-group-id="1741349086-38">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="1741349086-38">}</span><span class="w">
+</span><span class="p" data-group-id="2613175902-38">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2613175902-38">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">divide!</span><span class="p" data-group-id="1741349086-39">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="1741349086-39">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">divide!</span><span class="p" data-group-id="2613175902-39">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2613175902-39">)</span><span class="w">
 </span><span class="mf">2.0</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">divide!</span><span class="p" data-group-id="1741349086-40">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="1741349086-40">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">MyMath</span><span class="o">.</span><span class="n">divide!</span><span class="p" data-group-id="2613175902-40">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="2613175902-40">)</span><span class="w">
 </span><span class="gt">** (RuntimeError) do not divide by zero in MyMath functions</span><span class="w">
 
 </span><span class="c1">#&gt; 23:14:44.410 [error] MyMath.divide!(4, 0) -&gt; ** (RuntimeError) do not divide by zero in MyMath functions</span></code></pre>
@@ -179,20 +185,6 @@ Pages
       </a>
       <span class="text">Summary</span>
     </h1>
-<div class="summary-types summary">
-  <h2>
-    <a href="#types">Types</a>
-  </h2>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#t:options/0" translate="no">options()</a>
-
-      </div>
-
-    </div>
-
-</div>
 <div class="summary-functions summary">
   <h2>
     <a href="#functions">Functions</a>
@@ -204,7 +196,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a ALERT level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a ALERT level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -214,7 +208,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a ALERT level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a ALERT level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -224,7 +220,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a CRITICAL level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a CRITICAL level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -234,7 +232,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a CRITICAL level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a CRITICAL level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -244,7 +244,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a DEBUG level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a DEBUG level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -254,7 +256,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a DEBUG level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a DEBUG level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -264,7 +268,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a EMERGENCY level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a EMERGENCY level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -274,7 +280,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a EMERGENCY level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a EMERGENCY level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -284,7 +292,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a ERROR level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a ERROR level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -294,7 +304,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a ERROR level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a ERROR level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -304,7 +316,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces an INFO level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces an INFO level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -314,7 +328,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces an INFO level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces an INFO level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -324,7 +340,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a NOTICE level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a NOTICE level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -334,18 +352,9 @@ Pages
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a NOTICE level log using the provided message.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#silent_log/0" translate="no">silent_log()</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>A decorator that produces no log UNLESS a configuration is provided in which case it produces a log at the provided
-level using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a NOTICE level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -356,7 +365,7 @@ level using the provided message.</p></div>
       </div>
 
         <div class="summary-synopsis"><p>A decorator that produces no log UNLESS a configuration is provided in which case it produces a log at the provided
-level using the provided message.</p></div>
+level using the provided message.. The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -366,7 +375,9 @@ level using the provided message.</p></div>
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a WARNING level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a WARNING level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -376,7 +387,9 @@ level using the provided message.</p></div>
 
       </div>
 
-        <div class="summary-synopsis"><p>A decorator that produces a WARNING level log using the provided message.</p></div>
+        <div class="summary-synopsis"><p>A decorator that produces a WARNING level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p></div>
 
     </div>
 
@@ -384,46 +397,6 @@ level using the provided message.</p></div>
 
   </section>
 
-
-  <section id="types" class="details-list">
-    <h1 class="section-heading">
-      <a class="hover-link" href="#types">
-        <i class="ri-link-m" aria-hidden="true"></i>
-      </a>
-      <span class="text">Types</span>
-    </h1>
-    <div class="types-list">
-<section class="detail" id="t:options/0">
-
-  <div class="detail-header">
-    <a href="#t:options/0" class="detail-link" title="Link to this type">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this type</span>
-    </a>
-    <h1 class="signature" translate="no">options()</h1>
-
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L73" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@type</span> options() :: [<a href="Decorated.Logger.Opts.html#t:log_opt/0">Decorated.Logger.Opts.log_opt</a>()]</pre>
-
-      </div>
-
-
-  </section>
-</section>
-
-    </div>
-  </section>
 
   <section id="functions" class="details-list">
     <h1 class="section-heading">
@@ -442,7 +415,7 @@ level using the provided message.</p></div>
     </a>
     <h1 class="signature" translate="no">alert_log()</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -460,8 +433,15 @@ level using the provided message.</p></div>
 
       </div>
 
-<p>A decorator that produces a ALERT level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a ALERT level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="alert_log/0-options" class="section-heading">
+  <a href="#alert_log/0-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="alert_log/1">
@@ -473,7 +453,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">alert_log(var1)</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -487,12 +467,19 @@ definition.</p>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> alert_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> alert_log(<a href="Decorated.Logger.Opts.html#t:options/0">Decorated.Logger.Opts.options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
 
       </div>
 
-<p>A decorator that produces a ALERT level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a ALERT level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="alert_log/1-options" class="section-heading">
+  <a href="#alert_log/1-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="critical_log/0">
@@ -504,7 +491,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">critical_log()</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -522,8 +509,15 @@ definition.</p>
 
       </div>
 
-<p>A decorator that produces a CRITICAL level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a CRITICAL level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="critical_log/0-options" class="section-heading">
+  <a href="#critical_log/0-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="critical_log/1">
@@ -535,7 +529,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">critical_log(var1)</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -549,12 +543,19 @@ definition.</p>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> critical_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> critical_log(<a href="Decorated.Logger.Opts.html#t:options/0">Decorated.Logger.Opts.options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
 
       </div>
 
-<p>A decorator that produces a CRITICAL level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a CRITICAL level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="critical_log/1-options" class="section-heading">
+  <a href="#critical_log/1-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="debug_log/0">
@@ -566,7 +567,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">debug_log()</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -584,8 +585,15 @@ definition.</p>
 
       </div>
 
-<p>A decorator that produces a DEBUG level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a DEBUG level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="debug_log/0-options" class="section-heading">
+  <a href="#debug_log/0-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="debug_log/1">
@@ -597,7 +605,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">debug_log(var1)</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -611,12 +619,19 @@ definition.</p>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> debug_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> debug_log(<a href="Decorated.Logger.Opts.html#t:options/0">Decorated.Logger.Opts.options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
 
       </div>
 
-<p>A decorator that produces a DEBUG level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a DEBUG level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="debug_log/1-options" class="section-heading">
+  <a href="#debug_log/1-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="emergency_log/0">
@@ -628,7 +643,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">emergency_log()</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -646,8 +661,15 @@ definition.</p>
 
       </div>
 
-<p>A decorator that produces a EMERGENCY level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a EMERGENCY level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="emergency_log/0-options" class="section-heading">
+  <a href="#emergency_log/0-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="emergency_log/1">
@@ -659,7 +681,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">emergency_log(var1)</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -673,12 +695,19 @@ definition.</p>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> emergency_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> emergency_log(<a href="Decorated.Logger.Opts.html#t:options/0">Decorated.Logger.Opts.options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
 
       </div>
 
-<p>A decorator that produces a EMERGENCY level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a EMERGENCY level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="emergency_log/1-options" class="section-heading">
+  <a href="#emergency_log/1-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="error_log/0">
@@ -690,7 +719,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">error_log()</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -708,8 +737,15 @@ definition.</p>
 
       </div>
 
-<p>A decorator that produces a ERROR level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a ERROR level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="error_log/0-options" class="section-heading">
+  <a href="#error_log/0-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="error_log/1">
@@ -721,7 +757,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">error_log(var1)</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -735,12 +771,19 @@ definition.</p>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> error_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> error_log(<a href="Decorated.Logger.Opts.html#t:options/0">Decorated.Logger.Opts.options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
 
       </div>
 
-<p>A decorator that produces a ERROR level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a ERROR level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="error_log/1-options" class="section-heading">
+  <a href="#error_log/1-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="info_log/0">
@@ -752,7 +795,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">info_log()</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -770,8 +813,15 @@ definition.</p>
 
       </div>
 
-<p>A decorator that produces an INFO level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces an INFO level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="info_log/0-options" class="section-heading">
+  <a href="#info_log/0-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="info_log/1">
@@ -783,7 +833,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">info_log(var1)</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -797,12 +847,19 @@ definition.</p>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> info_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> info_log(<a href="Decorated.Logger.Opts.html#t:options/0">Decorated.Logger.Opts.options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
 
       </div>
 
-<p>A decorator that produces an INFO level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces an INFO level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="info_log/1-options" class="section-heading">
+  <a href="#info_log/1-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="notice_log/0">
@@ -814,7 +871,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">notice_log()</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -832,8 +889,15 @@ definition.</p>
 
       </div>
 
-<p>A decorator that produces a NOTICE level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a NOTICE level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="notice_log/0-options" class="section-heading">
+  <a href="#notice_log/0-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="notice_log/1">
@@ -845,7 +909,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">notice_log(var1)</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -859,44 +923,19 @@ definition.</p>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> notice_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> notice_log(<a href="Decorated.Logger.Opts.html#t:options/0">Decorated.Logger.Opts.options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
 
       </div>
 
-<p>A decorator that produces a NOTICE level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
-  </section>
-</section>
-<section class="detail" id="silent_log/0">
-
-  <div class="detail-header">
-    <a href="#silent_log/0" class="detail-link" title="Link to this macro">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this macro</span>
-    </a>
-    <h1 class="signature" translate="no">silent_log()</h1>
-
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-      <span class="note">(macro)</span>
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> silent_log() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
-
-      </div>
-
-<p>A decorator that produces no log UNLESS a configuration is provided in which case it produces a log at the provided
-level using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a NOTICE level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="notice_log/1-options" class="section-heading">
+  <a href="#notice_log/1-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="silent_log/1">
@@ -908,7 +947,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">silent_log(var1)</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -922,13 +961,18 @@ definition.</p>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> silent_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> silent_log(<a href="Decorated.Logger.Opts.html#t:options/0">Decorated.Logger.Opts.options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
 
       </div>
 
 <p>A decorator that produces no log UNLESS a configuration is provided in which case it produces a log at the provided
-level using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+level using the provided message.. The message has access to the named bindings of the decorated function's arguments.</p><h2 id="silent_log/1-options" class="section-heading">
+  <a href="#silent_log/1-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="warning_log/0">
@@ -940,7 +984,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">warning_log()</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -958,8 +1002,15 @@ definition.</p>
 
       </div>
 
-<p>A decorator that produces a WARNING level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a WARNING level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="warning_log/0-options" class="section-heading">
+  <a href="#warning_log/0-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 <section class="detail" id="warning_log/1">
@@ -971,7 +1022,7 @@ definition.</p>
     </a>
     <h1 class="signature" translate="no">warning_log(var1)</h1>
 
-      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L49" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/Morgahl/decorated/blob/main/lib/decorated/logger.ex#L53" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -985,12 +1036,19 @@ definition.</p>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> warning_log(<a href="#t:options/0">options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> warning_log(<a href="Decorated.Logger.Opts.html#t:options/0">Decorated.Logger.Opts.options</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
 
       </div>
 
-<p>A decorator that produces a WARNING level log using the provided message.</p><p>The message has interpolated access to the function arguments by name defined in the imeadiately following function
-definition.</p>
+<p>A decorator that produces a WARNING level log using the <code class="inline">:message</code> when configured or a default message of:
+  <code class="inline">Module.function(list, of , args) -&gt; result</code>.
+The message has access to the named bindings of the decorated function's arguments.</p><h2 id="warning_log/1-options" class="section-heading">
+  <a href="#warning_log/1-options" class="hover-link">
+    <i class="ri-link-m" aria-hidden="true"></i>
+  </a>
+  <span class="text">Options</span>
+</h2>
+<p>Please refer to <a href="Decorated.Logger.Opts.html"><code class="inline">Decorated.Logger.Opts</code></a> for full details</p>
   </section>
 </section>
 
