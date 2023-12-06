@@ -27,34 +27,33 @@ defmodule Decorated.Dbg do
     syntax_colors: IO.ANSI.syntax_colors()
   ]
 
-  dbg_log_doc =
-    """
-    A decorator that wraps the function body in a `dbg/2` call.
+  dbg_log_doc = """
+  A decorator that wraps the function body in a `dbg/2` call.
 
-    The `dbg/2` call is configured with the provided options merged with the default options.
+  The `dbg/2` call is configured with the provided options merged with the default options.
 
-    ## Example
+  ## Example
 
-        defmodule MyMath do
-          use Decorated.Dbg
+      defmodule MyMath do
+        use Decorated.Dbg
 
-          @decorate dbg_log()
-          @spec add(number(), number()) :: number()
-          def add(a, b), do: {:ok, a + b}
+        @decorate dbg_log()
+        @spec add(number(), number()) :: number()
+        def add(a, b), do: {:ok, a + b}
 
-          @decorate dbg_log([pretty: false])
-          @spec sub(number(), number()) :: number()
-          def sub(a, b), do: {:ok, a - b}
-        end
+        @decorate dbg_log([pretty: false])
+        @spec sub(number(), number()) :: number()
+        def sub(a, b), do: {:ok, a - b}
+      end
 
-        iex> MyMath.add(1, 2)
-        #> add(a, b) #=> {:ok, 3}
-        {:ok, 3}
+      iex> MyMath.add(1, 2)
+      #> add(a, b) #=> {:ok, 3}
+      {:ok, 3}
 
-        iex> MyMath.sub(1, 2)
-        #> add(a, b) #=> {:ok, -1}
-        {:ok, -1}
-    """
+      iex> MyMath.sub(1, 2)
+      #> add(a, b) #=> {:ok, -1}
+      {:ok, -1}
+  """
 
   @doc dbg_log_doc
   defmacro dbg_log()

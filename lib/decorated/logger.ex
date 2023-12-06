@@ -2,6 +2,10 @@ defmodule Decorated.Logger do
   @moduledoc """
   A simple decorator that takes a message and logs the function name, arguments, and result of a function call.
 
+  ## Options
+
+  Please refer to `Decorated.Logger.Opts` for full details
+
   ## Example
 
       defmodule MyMath do
@@ -63,186 +67,193 @@ defmodule Decorated.Logger do
     alert_log: 1,
     emergency_log: 0,
     emergency_log: 1,
-    silent_log: 0,
     silent_log: 1
 
   import Decorated.Utilites.Compile
 
   alias Decorated.Logger.Opts
 
-  @type options() :: [Opts.log_opt()]
+  debug_log_doc = """
+  A decorator that produces a DEBUG level log using the `:message` when configured or a default message of:
+    `Module.function(list, of , args) -> result`.
+  The message has access to the named bindings of the decorated function's arguments.
 
-  debug_log =
-    """
-    A decorator that produces a DEBUG level log using the provided message.
+  ## Options
 
-    The message has interpolated access to the function arguments by name defined in the imeadiately following function
-    definition.
-    """
+  Please refer to `Decorated.Logger.Opts` for full details
+  """
 
-  @doc debug_log
+  @doc debug_log_doc
   defmacro debug_log()
 
-  @doc debug_log
+  @doc debug_log_doc
   defmacro debug_log(opts)
 
   @doc false
   @spec debug_log() :: no_return()
-  @spec debug_log(options()) :: no_return()
+  @spec debug_log(Opts.options()) :: no_return()
   def debug_log(opts \\ [], body, ctx), do: log(:debug, opts, body, ctx)
 
-  info_log =
-    """
-    A decorator that produces an INFO level log using the provided message.
+  info_log_doc = """
+  A decorator that produces an INFO level log using the `:message` when configured or a default message of:
+    `Module.function(list, of , args) -> result`.
+  The message has access to the named bindings of the decorated function's arguments.
 
-    The message has interpolated access to the function arguments by name defined in the imeadiately following function
-    definition.
-    """
+  ## Options
 
-  @doc info_log
+  Please refer to `Decorated.Logger.Opts` for full details
+  """
+
+  @doc info_log_doc
   defmacro info_log()
 
-  @doc info_log
+  @doc info_log_doc
   defmacro info_log(opts)
 
   @doc false
   @spec info_log() :: no_return()
-  @spec info_log(options()) :: no_return()
+  @spec info_log(Opts.options()) :: no_return()
   def info_log(opts \\ [], body, ctx), do: log(:info, opts, body, ctx)
 
-  notice_log =
-    """
-    A decorator that produces a NOTICE level log using the provided message.
+  notice_log_doc = """
+  A decorator that produces a NOTICE level log using the `:message` when configured or a default message of:
+    `Module.function(list, of , args) -> result`.
+  The message has access to the named bindings of the decorated function's arguments.
 
-    The message has interpolated access to the function arguments by name defined in the imeadiately following function
-    definition.
-    """
+  ## Options
 
-  @doc notice_log
+  Please refer to `Decorated.Logger.Opts` for full details
+  """
+
+  @doc notice_log_doc
   defmacro notice_log()
 
-  @doc notice_log
+  @doc notice_log_doc
   defmacro notice_log(opts)
 
   @doc false
   @spec notice_log() :: no_return()
-  @spec notice_log(options()) :: no_return()
+  @spec notice_log(Opts.options()) :: no_return()
   def notice_log(opts \\ [], body, ctx), do: log(:notice, opts, body, ctx)
 
-  warning_log =
-    """
-    A decorator that produces a WARNING level log using the provided message.
+  warning_log_doc = """
+  A decorator that produces a WARNING level log using the `:message` when configured or a default message of:
+    `Module.function(list, of , args) -> result`.
+  The message has access to the named bindings of the decorated function's arguments.
 
-    The message has interpolated access to the function arguments by name defined in the imeadiately following function
-    definition.
-    """
+  ## Options
 
-  @doc warning_log
+  Please refer to `Decorated.Logger.Opts` for full details
+  """
+
+  @doc warning_log_doc
   defmacro warning_log()
 
-  @doc warning_log
+  @doc warning_log_doc
   defmacro warning_log(opts)
 
   @doc false
   @spec warning_log() :: no_return()
-  @spec warning_log(options()) :: no_return()
+  @spec warning_log(Opts.options()) :: no_return()
   def warning_log(opts \\ [], body, ctx), do: log(:warning, opts, body, ctx)
 
-  error_log =
-    """
-    A decorator that produces a ERROR level log using the provided message.
+  error_log_doc = """
+  A decorator that produces a ERROR level log using the `:message` when configured or a default message of:
+    `Module.function(list, of , args) -> result`.
+  The message has access to the named bindings of the decorated function's arguments.
 
-    The message has interpolated access to the function arguments by name defined in the imeadiately following function
-    definition.
-    """
+  ## Options
 
-  @doc error_log
+  Please refer to `Decorated.Logger.Opts` for full details
+  """
+
+  @doc error_log_doc
   defmacro error_log()
 
-  @doc error_log
+  @doc error_log_doc
   defmacro error_log(opts)
 
   @doc false
   @spec error_log() :: no_return()
-  @spec error_log(options()) :: no_return()
+  @spec error_log(Opts.options()) :: no_return()
   def error_log(opts \\ [], body, ctx), do: log(:error, opts, body, ctx)
 
-  critical_log =
-    """
-    A decorator that produces a CRITICAL level log using the provided message.
+  critical_log_doc = """
+  A decorator that produces a CRITICAL level log using the `:message` when configured or a default message of:
+    `Module.function(list, of , args) -> result`.
+  The message has access to the named bindings of the decorated function's arguments.
 
-    The message has interpolated access to the function arguments by name defined in the imeadiately following function
-    definition.
-    """
+  ## Options
 
-  @doc critical_log
+  Please refer to `Decorated.Logger.Opts` for full details
+  """
+
+  @doc critical_log_doc
   defmacro critical_log()
 
-  @doc critical_log
+  @doc critical_log_doc
   defmacro critical_log(opts)
 
   @doc false
   @spec critical_log() :: no_return()
-  @spec critical_log(options()) :: no_return()
+  @spec critical_log(Opts.options()) :: no_return()
   def critical_log(opts \\ [], body, ctx), do: log(:critical, opts, body, ctx)
 
-  alert_log =
-    """
-    A decorator that produces a ALERT level log using the provided message.
+  alert_log_doc = """
+  A decorator that produces a ALERT level log using the `:message` when configured or a default message of:
+    `Module.function(list, of , args) -> result`.
+  The message has access to the named bindings of the decorated function's arguments.
 
-    The message has interpolated access to the function arguments by name defined in the imeadiately following function
-    definition.
-    """
+  ## Options
 
-  @doc alert_log
+  Please refer to `Decorated.Logger.Opts` for full details
+  """
+
+  @doc alert_log_doc
   defmacro alert_log()
 
-  @doc alert_log
+  @doc alert_log_doc
   defmacro alert_log(opts)
 
   @doc false
   @spec alert_log() :: no_return()
-  @spec alert_log(options()) :: no_return()
+  @spec alert_log(Opts.options()) :: no_return()
   def alert_log(opts \\ [], body, ctx), do: log(:alert, opts, body, ctx)
 
-  emergency_log =
-    """
-    A decorator that produces a EMERGENCY level log using the provided message.
+  emergency_log_doc = """
+  A decorator that produces a EMERGENCY level log using the `:message` when configured or a default message of:
+    `Module.function(list, of , args) -> result`.
+  The message has access to the named bindings of the decorated function's arguments.
 
-    The message has interpolated access to the function arguments by name defined in the imeadiately following function
-    definition.
-    """
+  ## Options
 
-  @doc emergency_log
+  Please refer to `Decorated.Logger.Opts` for full details
+  """
+
+  @doc emergency_log_doc
   defmacro emergency_log()
 
-  @doc emergency_log
+  @doc emergency_log_doc
   defmacro emergency_log(opts)
 
   @doc false
   @spec emergency_log() :: no_return()
-  @spec emergency_log(options()) :: no_return()
+  @spec emergency_log(Opts.options()) :: no_return()
   def emergency_log(opts \\ [], body, ctx), do: log(:emergency, opts, body, ctx)
 
-  silent_log =
-    """
-    A decorator that produces no log UNLESS a configuration is provided in which case it produces a log at the provided
-    level using the provided message.
+  @doc """
+  A decorator that produces no log UNLESS a configuration is provided in which case it produces a log at the provided
+  level using the provided message.. The message has access to the named bindings of the decorated function's arguments.
 
-    The message has interpolated access to the function arguments by name defined in the imeadiately following function
-    definition.
-    """
+  ## Options
 
-  @doc silent_log
-  defmacro silent_log()
-
-  @doc silent_log
+  Please refer to `Decorated.Logger.Opts` for full details
+  """
   defmacro silent_log(opts)
 
   @doc false
-  @spec silent_log() :: no_return()
-  @spec silent_log(options()) :: no_return()
-  def silent_log(opts \\ [], body, ctx), do: log(:silent, opts, body, ctx)
+  @spec silent_log(Opts.options()) :: no_return()
+  def silent_log(opts, body, ctx) when is_list(opts), do: log(:silent, opts, body, ctx)
 
   @doc false
   defmacro silent(_msg \\ nil, _ctx \\ nil), do: nil

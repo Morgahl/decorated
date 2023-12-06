@@ -4,12 +4,11 @@ defmodule Decorated.Logger.Opts do
 
   ## Option
 
-  * `:message` - `message_opt()` - The message to log. This can be a string, a binary, or an IO list.
-  * `:none` - `log_level()` - The log level to use when the decorated function returns `:none`. Defaults to the same level as the decorating log level.
-  * `:error` - `log_level()` - The log level to use when the decorated function returns `:error` or `{:error, _}`. Defaults to the same level as the decorating log level.
-  * `:catch` - `log_level()` - The log level to use when the decorated function raises an `Exception.kind()`. Defaults to the same level as the decorating log level.
-  * `:ignored` - `ignore_behaviour()` - The behaviour to use when the decorated function has an ignored argument ex. `_` or `_ignored`.
-    Defaults to `:rename`.
+  * `:message` - `Decorated.Logger.Opts.message()` - The message to log. This can be a string, a binary, or an IO list.
+  * `:none` - `Decorated.Logger.Opts.log_level()` - The log level to use when the decorated function returns `:none`. Defaults to the same level as the decorating log level.
+  * `:error` - `Decorated.Logger.Opts.log_level()` - The log level to use when the decorated function returns `:error` or `{:error, _}`. Defaults to the same level as the decorating log level.
+  * `:catch` - `Decorated.Logger.Opts.log_level()` - The log level to use when the decorated function raises an `Exception.kind()`. Defaults to the same level as the decorating log level.
+  * `:ignored` - `Decorated.Logger.Opts.ignore_behaviour()` - The behaviour to use when the decorated function has an ignored argument ex. `_` or `_ignored`. Defaults to `:rename`.
     * `:drop` - Drop the ignored argument from the log message. `foo(_, _a, bar)(nil, nil, :ok)` => `foo(:ok)`
     * `:rename` - Rename the ignored argument in the log message. `foo(_, _a, bar)(nil, nil, :ok)` => `foo(_, _a, :ok)`
     * `:keep` - Keep the ignored argument in the log message. `foo(_, _a, bar)(nil, nil, :ok)` => `foo(nil, nil, :ok)`
@@ -81,30 +80,48 @@ defmodule Decorated.Logger.Opts do
           :silent
           | Logger.level()
 
-  @type message_opt() :: {:message, String.t() | (any() -> String.t()) | (any(), Context.t() -> String.t())}
+  @typedoc """
+  The message to log.
+
+  This can be a string, a binary, or an IO list, but it must be a valid message for `Logger.log/4`. Additionally it can be a function that
+  takes the result of the decorated function and optionally the Decorator's context and returns a valid message for `Logger.log/4`.
+
+  ## Example
+
+      info_log(message: "foo(\#{bar})")
+      info_log(message: fn result -> "foo(\#{bar}) -> \#{result}" end)
+      info_log(message: fn result, ctx -> "foo(\#{bar}) -> \#{result} (\#{inspect(ctx)})" end)
+      def foo(bar), do: bar
+  """
+  @type message() ::
+          {:message,
+           String.t()
+           | (result :: any() -> String.t())
+           | (result :: any(), Context.t() -> String.t())}
 
   @typedoc """
   The log level configuration, message, and metadata, and log level overides for common divergent scenarios.
 
   ## Option
 
-  * `:message` - `message_opt()` - The message to log. This can be a string, a binary, or an IO list.
-  * `:none` - `log_level()` - The log level to use when the decorated function returns `:none`. Defaults to the same level as the decorating log level.
-  * `:error` - `log_level()` - The log level to use when the decorated function returns `:error` or `{:error, _}`. Defaults to the same level as the decorating log level.
-  * `:catch` - `log_level()` - The log level to use when the decorated function raises an `Exception.kind()`. Defaults to the same level as the decorating log level.
-  * `:ignored` - `ignore_behaviour()` - The behaviour to use when the decorated function has an ignored argument ex. `_` or `_ignored`. Defaults to `:rename`.
+  * `:message` - `Decorated.Logger.Opts.message()` - The message to log. This can be a string, a binary, or an IO list.
+  * `:none` - `Decorated.Logger.Opts.log_level()` - The log level to use when the decorated function returns `:none`. Defaults to the same level as the decorating log level.
+  * `:error` - `Decorated.Logger.Opts.log_level()` - The log level to use when the decorated function returns `:error` or `{:error, _}`. Defaults to the same level as the decorating log level.
+  * `:catch` - `Decorated.Logger.Opts.log_level()` - The log level to use when the decorated function raises an `Exception.kind()`. Defaults to the same level as the decorating log level.
+  * `:ignored` - `Decorated.Logger.Opts.ignore_behaviour()` - The behaviour to use when the decorated function has an ignored argument ex. `_` or `_ignored`. Defaults to `:rename`.
     * `:drop` - Drop the ignored argument from the log message. `foo(_, _a, bar)(nil, nil, :ok)` => `foo(:ok)`
     * `:rename` - Rename the ignored argument in the log message. `foo(_, _a, bar)(nil, nil, :ok)` => `foo(_, _a, :ok)`
     * `:keep` - Keep the ignored argument in the log message. `foo(_, _a, bar)(nil, nil, :ok)` => `foo(nil, nil, :ok)`
   * `:metadata` - `Keyword.t()` - The metadata to include in the log message. Injects the `:line` metadata by default.
   """
-  @type log_opt() ::
-          message_opt()
+  @type options() :: [
+          message()
           | {:none, level()}
           | {:error, level()}
           | {:catch, level()}
           | {:ignored, ignore_behaviour()}
           | {:metadata, Keyword.t()}
+        ]
 
   @typedoc """
   The ignore behaviour to use for a given configuration.
